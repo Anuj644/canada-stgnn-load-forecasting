@@ -221,3 +221,5 @@ __marimo__/
 
 #custom
 data/
+models/
+results/

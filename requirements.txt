@@ -1,2 +1,43 @@
-tqdm
-requests
+# ============================================================
+# Canada STGNN Load Forecasting — Requirements
+# ============================================================
+
+# --- Data download (existing) ---
+requests==2.32.3
+tqdm==4.67.1
+
+# --- Core data processing ---
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==19.0.1          # Parquet read/write
+pyyaml==6.0.2            # config loading
+scikit-learn==1.6.1      # IsotonicRegression, preprocessing utilities
+
+# --- Machine learning ---
+xgboost==2.1.4
+
+# --- Deep learning (CPU; swap for a GPU wheel if needed) ---
+# Install torch manually for your platform if the line below does not work:
+#   https://pytorch.org/get-started/locally/
+torch==2.6.0
+
+# --- API backend ---
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+python-multipart==0.0.20  # required by FastAPI for form data
+
+# --- Dashboard ---
+streamlit==1.45.1
+plotly==6.0.1
+
+# --- Probabilistic metrics ---
+scipy==1.15.3
+
+# --- Testing ---
+pytest==8.3.5
+pytest-cov==6.1.0
+
+# --- Notebooks (optional) ---
+jupyterlab==4.4.2
+matplotlib==3.10.1
+seaborn==0.13.2

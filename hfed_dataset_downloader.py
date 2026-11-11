@@ -20,6 +20,7 @@ API: https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/dataflow/CCEI/all/latest
 import argparse
 import csv
 import json
+import sys as _sys
 import re
 import sys
 import time
@@ -32,6 +33,10 @@ import requests
 from requests.adapters import HTTPAdapter
 from tqdm import tqdm
 from urllib3.util.retry import Retry
+
+# Raise the csv field-size limit — ON's all.csv has very wide rows that exceed
+# the default 131 072-character limit.
+csv.field_size_limit(10 * 1024 * 1024)  # 10 MB per field
 
 BASE = "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest"
 NS = {

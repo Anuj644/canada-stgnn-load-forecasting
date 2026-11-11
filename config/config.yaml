@@ -1,0 +1,218 @@
+# ============================================================
+# Spatio-Temporal GNN — Day-Ahead Electricity Demand Forecasting
+# Main configuration file
+# ============================================================
+
+# --- Paths ---
+paths:
+  raw_data_dir: "data/hfed/2019-01-01_to_2024-12-31"
+  processed_data_dir: "data/processed"
+  holiday_cache_dir: "data/holidays"
+  model_dir: "models"
+  results_dir: "results"
+  logs_dir: "logs"
+
+# --- Dataset download ---
+download:
+  # Regions to include in the hourly forecasting cohort
+  # SK excluded: daily resolution only
+  # YK included as optional with TOTAL as demand proxy
+  regions:
+    - AB
+    - BC
+    - NB
+    - NL
+    - NS
+    - "ON"
+    - PE
+    - QC
+    - YK
+  # Primary demand variable per region
+  demand_variables:
+    AB: INTERNAL_LOAD
+    BC: LOAD
+    NB: DEMAND
+    NL: DEMAND
+    NS: LOAD
+    "ON": ONTARIO_DEMAND
+    PE: ON_ISL_LOAD
+    QC: DEMAND
+    YK: TOTAL  # generation total proxy
+
+  # Generation-mix variables used as weather-correlated features (where available)
+  generation_variables:
+    AB: [WIND, SOLAR, HYDRO, GAS, COAL, DUAL_FUEL]
+    BC: [NSI]
+    NB: [NSI]
+    NL: []
+    NS: [WIND, NSI]
+    "ON": [WIND_OUTPUT, SOLAR_OUTPUT, HYDRO_OUTPUT, NUCLEAR_OUTPUT, GAS_OUTPUT]
+    PE: [ON_ISL_WIND, IMPORT_CABLES]
+    QC: [WIND, SOLAR, HYDRO]
+    YK: [HYDRO, THERMAL]
+
+# --- Timezone offsets (standard UTC offset, hours, without DST) ---
+# Used as fallback when DATETIME_LOCAL_OFFSET is unavailable
+region_utc_offsets:
+  AB: -7
+  BC: -8
+  NB: -4
+  NL: -3.5  # Newfoundland Standard Time
+  NS: -4
+  "ON": -5
+  PE: -4
+  QC: -5
+  SK: -6
+  YK: -7
+
+# --- Nager.Date API ---
+holidays:
+  api_base_url: "https://date.nager.at/api/v3"   # v3: supports all historical years
+  country_code: "CA"
+  region_subdivision_map:
+    AB: "CA-AB"
+    BC: "CA-BC"
+    NB: "CA-NB"
+    NL: "CA-NL"
+    NS: "CA-NS"
+    "ON": "CA-ON"
+    PE: "CA-PE"
+    QC: "CA-QC"
+    SK: "CA-SK"
+    YK: "CA-YT"
+  cache_file: "data/holidays/canada_holidays.json"
+
+# --- Forecasting problem definition ---
+forecast:
+  horizon_hours: 24         # Predict 24 hours of the next calendar day
+  issue_hour_local: 23      # Forecast issued at 23:00 local time
+  target_start_hour: 0      # Target window: 00:00 of next day
+  target_end_hour: 23       # Target window: 23:00 of next day
+
+# --- Train/val/test splits (chronological) ---
+splits:
+  train_end: "2023-12-31"   # will be updated after full data download
+  val_end: "2024-06-30"
+  # test: everything after val_end
+
+# --- Feature engineering ---
+features:
+  # Demand lag features (hours back, computed on training data)
+  demand_lags: [1, 2, 3, 6, 12, 24, 48, 168]  # 168 = 1 week
+  # Rolling statistics windows (hours)
+  rolling_windows: [24, 168]
+  # Calendar features to generate
+  calendar:
+    - hour
+    - day_of_week
+    - day_of_month
+    - month
+    - day_of_year
+    - week_of_year
+    - is_weekend
+    - is_holiday
+    - holiday_name
+    - is_day_before_holiday
+    - is_day_after_holiday
+
+# --- Preprocessing ---
+preprocessing:
+  resample_method: "mean"           # for sub-hourly → hourly
+  min_hourly_coverage: 0.1          # require 10% of sub-hourly obs to form hourly mean
+                                   # NB/NS have highly irregular sub-minute data; 50% would exclude too many hours
+  drop_obs_status_not_A: false       # keep all; flag non-A rows
+  demand_min_valid: 0.0             # MW; below this is flagged as suspicious
+  demand_max_multiplier: 5.0        # flag values > 5× regional median as suspicious
+
+# --- Scaling ---
+scaling:
+  method: "standard"  # standard (z-score) or minmax
+
+# --- High-demand detection ---
+high_demand:
+  threshold_percentile: 90   # 90th percentile of training-period demand per region
+  # Configurable; will be computed from training data, never from val/test
+
+# --- Baseline models ---
+naive:
+  previous_day: true       # Naive-day: same hour yesterday
+  previous_week: true      # Naive-week: same hour last week
+
+xgboost:
+  n_estimators: 500
+  max_depth: 6
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+  early_stopping_rounds: 50
+
+lstm:
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.1
+  lookback_hours: 168       # 1 week of history
+  batch_size: 64
+  epochs: 100
+  learning_rate: 0.001
+  patience: 15
+  random_seed: 42
+
+gru:
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.1
+  lookback_hours: 168
+  batch_size: 64
+  epochs: 100
+  learning_rate: 0.001
+  patience: 15
+  random_seed: 42
+
+# --- STGNN / STGCN ---
+stgnn:
+  # Graph configurations to run
+  graph_types:
+    - identity          # control: no cross-region sharing
+    - geographic        # based on documented geographic proximity
+    - correlation       # built from training-period demand correlations
+    - interconnection   # documented electricity interconnections
+  
+  # Architecture
+  num_st_blocks: 3
+  channels: [64, 64, 64]
+  kernel_size: 3            # temporal convolution kernel
+  dropout: 0.1
+  horizon: 24
+  lookback_hours: 168
+
+  # Training
+  batch_size: 32
+  epochs: 150
+  learning_rate: 0.001
+  patience: 20
+  random_seeds: [42, 123, 456]   # repeated seeds for uncertainty estimate
+
+  # Graph construction
+  correlation_threshold: 0.6     # min Pearson correlation to draw an edge
+  geographic_max_distance_km: 2000  # max distance for geographic edges
+
+# --- Evaluation ---
+evaluation:
+  metrics: [MAE, RMSE, MAPE]
+  report_by:
+    - overall
+    - region
+    - forecast_hour
+    - peak_demand
+    - holiday
+  peak_percentile: 90   # must match high_demand.threshold_percentile
+
+# --- Backend API ---
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+# --- Dashboard ---
+dashboard:
+  port: 8501
