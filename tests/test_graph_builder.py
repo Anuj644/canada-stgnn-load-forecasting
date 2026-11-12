@@ -1,17 +1,16 @@
 """Tests for graph construction (all four configurations)."""
 import numpy as np
 import pandas as pd
-import pytest
 
 from src.models.stgnn.graph_builder import (
-    build_identity_graph,
-    build_geographic_graph,
-    build_correlation_graph,
-    build_interconnection_graph,
-    build_all_graphs,
-    _normalise_adjacency,
     DOCUMENTED_INTERCONNECTIONS,
     REGION_COORDS,
+    _normalise_adjacency,
+    build_all_graphs,
+    build_correlation_graph,
+    build_geographic_graph,
+    build_identity_graph,
+    build_interconnection_graph,
 )
 
 REGIONS = ["AB", "BC", "NB", "NL", "NS", "ON", "PE", "QC"]

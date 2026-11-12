@@ -1,10 +1,11 @@
 """Tests for data loading and resampling."""
 import numpy as np
 import pandas as pd
-import pytest
 
-from src.data.resampler import resample_to_hourly, detect_native_frequency, _normalise_hourly
-
+from src.data.resampler import (
+    detect_native_frequency,
+    resample_to_hourly,
+)
 
 # ---------------------------------------------------------------------------
 # Fixtures

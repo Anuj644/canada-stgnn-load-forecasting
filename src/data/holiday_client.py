@@ -19,10 +19,9 @@ import json
 import logging
 import time
 from pathlib import Path
-from typing import Optional
 
-import requests
 import pandas as pd
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -164,7 +163,7 @@ def fetch_holidays(
 
 def build_holiday_dataframe(
     holiday_data: dict[int, list[dict]],
-    hfed_regions: Optional[list[str]] = None,
+    hfed_regions: list[str] | None = None,
 ) -> pd.DataFrame:
     """Convert raw API holiday data to a tidy region-date DataFrame.
 
@@ -233,7 +232,7 @@ def get_holiday_df_for_data_range(
     start_year: int,
     end_year: int,
     cache_path: str | Path = "data/holidays/canada_holidays.json",
-    hfed_regions: Optional[list[str]] = None,
+    hfed_regions: list[str] | None = None,
     force_refresh: bool = False,
 ) -> pd.DataFrame:
     """High-level helper: fetch and build the holiday DataFrame for a year range.

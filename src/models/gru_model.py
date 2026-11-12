@@ -8,18 +8,17 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
 
-from src.models.lstm_model import DemandSequenceDataset, FORECAST_HOURS
+from src.models.lstm_model import FORECAST_HOURS, DemandSequenceDataset
 
 logger = logging.getLogger(__name__)
 
 try:
     import torch
-    import torch.nn as nn
+    from torch import nn
     from torch.utils.data import DataLoader, Dataset
     TORCH_AVAILABLE = True
 except ImportError:
@@ -47,7 +46,7 @@ if TORCH_AVAILABLE:
             )
             self.fc = nn.Linear(hidden_size, horizon)
 
-        def forward(self, x: "torch.Tensor") -> "torch.Tensor":
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
             _, h_n = self.gru(x)
             last_hidden = h_n[-1]
             return self.fc(last_hidden)
@@ -82,7 +81,7 @@ class GRUForecaster:
         self.patience = cfg.get("patience", 15)
         self.seed = cfg.get("random_seed", 42)
 
-        self.model: Optional[GRUModel] = None
+        self.model: GRUModel | None = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def _set_seed(self):
@@ -93,8 +92,8 @@ class GRUForecaster:
         self,
         train_df: pd.DataFrame,
         val_df: pd.DataFrame,
-        model_dir: Optional[str | Path] = None,
-    ) -> "GRUForecaster":
+        model_dir: str | Path | None = None,
+    ) -> GRUForecaster:
         self._set_seed()
         logger.info("Building GRU training dataset (lookback=%dh)...", self.lookback_hours)
 
@@ -229,7 +228,7 @@ class GRUForecaster:
         (model_dir / "meta.json").write_text(_json.dumps(meta, indent=2), encoding="utf-8")
         logger.info("GRU model saved to %s.", model_dir)
 
-    def load(self, model_dir: str | Path, input_size: int = None) -> "GRUForecaster":
+    def load(self, model_dir: str | Path, input_size: int | None = None) -> GRUForecaster:
         model_dir = Path(model_dir) / self.name
         import json as _json
         meta_path = model_dir / "meta.json"

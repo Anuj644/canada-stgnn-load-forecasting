@@ -21,16 +21,15 @@ from __future__ import annotations
 import logging
 import sys
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
 import yaml
 
-from src.data.hfed_loader import load_all_regions, audit_regions
-from src.data.resampler import resample_all_regions
-from src.data.holiday_client import get_holiday_df_for_data_range
 from src.data.feature_engineering import build_features
+from src.data.hfed_loader import audit_regions, load_all_regions
+from src.data.holiday_client import get_holiday_df_for_data_range
+from src.data.resampler import resample_all_regions
 
 logger = logging.getLogger(__name__)
 
@@ -97,7 +96,7 @@ class RegionalStandardScaler:
         self.stats: dict[str, dict[str, tuple[float, float]]] = {}
         # stats[region][feature] = (mean, std)
 
-    def fit(self, df: pd.DataFrame, feature_cols: list[str], region_col: str = "region") -> "RegionalStandardScaler":
+    def fit(self, df: pd.DataFrame, feature_cols: list[str], region_col: str = "region") -> RegionalStandardScaler:
         for region in df[region_col].unique():
             self.stats[region] = {}
             subset = df[df[region_col] == region]
@@ -139,7 +138,7 @@ class RegionalStandardScaler:
         return self.stats
 
     @classmethod
-    def from_dict(cls, d: dict) -> "RegionalStandardScaler":
+    def from_dict(cls, d: dict) -> RegionalStandardScaler:
         scaler = cls()
         scaler.stats = d
         return scaler
@@ -151,7 +150,7 @@ class RegionalStandardScaler:
 
 def run_pipeline(
     config: dict,
-    raw_data_dir: Optional[str | Path] = None,
+    raw_data_dir: str | Path | None = None,
     force_holiday_refresh: bool = False,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, RegionalStandardScaler]:
     """Run the full preprocessing pipeline.

@@ -19,11 +19,9 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
-import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -155,15 +153,15 @@ class XGBoostForecaster:
         self.early_stopping_rounds = xgb_cfg.get("early_stopping_rounds", 50)
 
         # models[(region, hour)] = fitted XGBRegressor
-        self.models: dict[tuple[str, int], "xgb.XGBRegressor"] = {}
+        self.models: dict[tuple[str, int], xgb.XGBRegressor] = {}
         self.feature_names: list[str] = []
 
     def fit(
         self,
         train_df: pd.DataFrame,
         val_df: pd.DataFrame,
-        model_dir: Optional[str | Path] = None,
-    ) -> "XGBoostForecaster":
+        model_dir: str | Path | None = None,
+    ) -> XGBoostForecaster:
         """Fit one model per (region, hour).
 
         Parameters
@@ -282,7 +280,7 @@ class XGBoostForecaster:
         )
         logger.info("XGBoost models saved to %s (%d files).", model_dir, len(self.models))
 
-    def load(self, model_dir: str | Path) -> "XGBoostForecaster":
+    def load(self, model_dir: str | Path) -> XGBoostForecaster:
         model_dir = Path(model_dir) / self.name
         meta = json.loads((model_dir / "meta.json").read_text(encoding="utf-8"))
         self.feature_names = meta["feature_names"]

@@ -25,7 +25,6 @@ planners — it does NOT imply grid failure, outage, or capacity violation.
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -59,7 +58,7 @@ def flag_high_demand(
     region_col: str = "region",
     hour_col: str = "target_hour",
     date_col: str = "forecast_date",
-    prob_col: Optional[str] = None,
+    prob_col: str | None = None,
 ) -> pd.DataFrame:
     """Annotate a forecast DataFrame with high-demand flags.
 

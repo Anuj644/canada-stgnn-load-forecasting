@@ -27,7 +27,6 @@ to estimate bias.
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -70,7 +69,7 @@ class DebiasPlus:
         actual_col: str = "actual",
         region_col: str = "region",
         hour_col: str = "target_hour",
-    ) -> "DebiasPlus":
+    ) -> DebiasPlus:
         """Estimate systematic bias from calibration (validation) data.
 
         Parameters

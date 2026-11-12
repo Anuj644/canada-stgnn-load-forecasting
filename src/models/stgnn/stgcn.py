@@ -27,7 +27,6 @@ Output shape: (batch, N, H)
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import numpy as np
 
@@ -35,8 +34,8 @@ logger = logging.getLogger(__name__)
 
 try:
     import torch
-    import torch.nn as nn
     import torch.nn.functional as F
+    from torch import nn
     TORCH_AVAILABLE = True
 except ImportError:
     TORCH_AVAILABLE = False
@@ -65,7 +64,7 @@ if TORCH_AVAILABLE:
             self.out_channels = out_channels
             self.kernel_size = kernel_size
 
-        def forward(self, x: "torch.Tensor") -> "torch.Tensor":
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
             # x: (B, C, T, N)
             out = self.conv(x)
             # Remove the extra padding on the right (causal)
@@ -85,8 +84,8 @@ if TORCH_AVAILABLE:
             self.fc = nn.Linear(in_channels, out_channels)
 
         def forward(
-            self, x: "torch.Tensor", adj: "torch.Tensor"
-        ) -> "torch.Tensor":
+            self, x: torch.Tensor, adj: torch.Tensor
+        ) -> torch.Tensor:
             # x:   (B, C, T, N)
             # adj: (N, N)
             B, C, T, N = x.shape
@@ -124,8 +123,8 @@ if TORCH_AVAILABLE:
             )
 
         def forward(
-            self, x: "torch.Tensor", adj: "torch.Tensor"
-        ) -> "torch.Tensor":
+            self, x: torch.Tensor, adj: torch.Tensor
+        ) -> torch.Tensor:
             # x: (B, C_in, T, N)
             residual = self.residual(x)
             out = self.temporal1(x)
@@ -135,7 +134,6 @@ if TORCH_AVAILABLE:
             t = min(out.size(2), residual.size(2))
             out = out[:, :, :t, :] + residual[:, :, :t, :]
             # LayerNorm over channel dim: reshape to (B, T, N, C), norm, back
-            B, C, T, N = out.shape
             out = out.permute(0, 2, 3, 1)      # (B, T, N, C)
             out = self.layer_norm(out)
             out = out.permute(0, 3, 1, 2)      # (B, C, T, N)
@@ -150,7 +148,7 @@ if TORCH_AVAILABLE:
             self.conv = nn.Conv2d(in_channels, in_channels, kernel_size=(1, 1))
             self.fc = nn.Linear(in_channels, horizon)
 
-        def forward(self, x: "torch.Tensor") -> "torch.Tensor":
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
             # x: (B, C, T, N)
             out = F.relu(self.conv(x))
             # Global average over time dimension
@@ -181,10 +179,10 @@ if TORCH_AVAILABLE:
             in_features: int,
             horizon: int = 24,
             num_blocks: int = 3,
-            channels: Optional[list[int]] = None,
+            channels: list[int] | None = None,
             kernel_size: int = 3,
             dropout: float = 0.1,
-            adj: Optional[np.ndarray] = None,
+            adj: np.ndarray | None = None,
         ):
             super().__init__()
             if channels is None:
@@ -216,7 +214,7 @@ if TORCH_AVAILABLE:
             else:
                 self.register_buffer("adj", torch.eye(n_nodes, dtype=torch.float32))
 
-        def forward(self, x: "torch.Tensor") -> "torch.Tensor":
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
             """
             Parameters
             ----------

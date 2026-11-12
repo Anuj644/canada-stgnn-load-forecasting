@@ -6,8 +6,8 @@ import pytest
 from src.data.feature_engineering import (
     add_calendar_features,
     add_demand_lags,
-    add_rolling_features,
     add_quality_flags,
+    add_rolling_features,
 )
 
 

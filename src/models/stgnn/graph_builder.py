@@ -41,7 +41,6 @@ from __future__ import annotations
 
 import logging
 import math
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -259,7 +258,7 @@ def build_interconnection_graph(regions: list[str]) -> np.ndarray:
 
 def build_all_graphs(
     regions: list[str],
-    train_df: Optional[pd.DataFrame] = None,
+    train_df: pd.DataFrame | None = None,
     max_distance_km: float = 2000.0,
     correlation_threshold: float = 0.6,
 ) -> dict[str, np.ndarray]:

@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -33,9 +33,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 try:
-    import streamlit as st
-    import plotly.graph_objects as go
     import plotly.express as px
+    import plotly.graph_objects as go
+    import streamlit as st
     DEPS_OK = True
 except ImportError as exc:
     DEPS_OK = False
@@ -245,12 +245,12 @@ def main():
             fig = go.Figure()
             fig.add_trace(go.Scatter(
                 x=hours, y=pred, mode="lines+markers",
-                name="Predicted", line=dict(color="#1f77b4", width=2),
+                name="Predicted", line={"color": "#1f77b4", "width": 2},
             ))
             if actual is not None and not np.all(np.isnan(actual.astype(float))):
                 fig.add_trace(go.Scatter(
                     x=hours, y=actual, mode="lines+markers",
-                    name="Actual", line=dict(color="#2ca02c", width=2, dash="dot"),
+                    name="Actual", line={"color": "#2ca02c", "width": 2, "dash": "dot"},
                 ))
             if thr:
                 fig.add_hline(
@@ -560,18 +560,18 @@ def main():
                         x=pd.concat([rdf["target_hour"], rdf["target_hour"][::-1]]),
                         y=pd.concat([rdf["upper_80"], rdf["lower_80"][::-1]]),
                         fill="toself", fillcolor="rgba(31,119,180,0.15)",
-                        line=dict(color="rgba(255,255,255,0)"),
+                        line={"color": "rgba(255,255,255,0)"},
                         name="80% PI",
                     ))
                 fig.add_trace(go.Scatter(
                     x=rdf["target_hour"], y=rdf["predicted"],
-                    mode="lines", name="Predicted", line=dict(color="#1f77b4", width=2),
+                    mode="lines", name="Predicted", line={"color": "#1f77b4", "width": 2},
                 ))
                 if "actual" in rdf.columns:
                     fig.add_trace(go.Scatter(
                         x=rdf["target_hour"], y=rdf["actual"],
                         mode="lines+markers", name="Actual",
-                        line=dict(color="#2ca02c", dash="dot"),
+                        line={"color": "#2ca02c", "dash": "dot"},
                     ))
                 thr = thresholds.get(sel_region)
                 if thr:

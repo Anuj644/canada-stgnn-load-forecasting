@@ -21,12 +21,10 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import json
 import logging
 import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import yaml
 
@@ -144,7 +142,9 @@ def main():
         test_df = pd.read_parquet(processed_dir / "test.parquet")
 
         import json as _json
+
         from src.data.pipeline import RegionalStandardScaler
+
         scaler_stats = _json.loads(
             (processed_dir / "scaler_stats.json").read_text(encoding="utf-8")
         )
@@ -290,7 +290,7 @@ def main():
         logger.info("=" * 60)
         if all_predictions:
             from src.evaluation.evaluator import run_full_evaluation
-            all_results, comparison = run_full_evaluation(
+            _all_results, comparison = run_full_evaluation(
                 all_predictions,
                 train_df=train_df,
                 regions=regions,
@@ -320,7 +320,7 @@ def main():
         best_model_name = next(
             (n for n in ["stgnn_identity", "stgnn_geographic", "xgboost", "naive_week"]
              if n in all_predictions),
-            list(all_predictions.keys())[0] if all_predictions else None,
+            next(iter(all_predictions), None),
         )
 
         if best_model_name:
@@ -361,8 +361,8 @@ def main():
                     pbc_path = results_dir / "probabilistic_predictions.parquet"
                     test_pbc.to_parquet(pbc_path, index=False)
                     logger.info("PBC predictions saved to %s.", pbc_path)
-            except Exception as exc:
-                logger.warning("PBC phase failed: %s", exc)
+            except Exception:
+                logger.warning("PBC phase failed", exc_info=True)
 
     logger.info("=" * 60)
     logger.info("Training pipeline complete.")

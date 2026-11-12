@@ -16,10 +16,8 @@ Data leakage prevention:
 
 from __future__ import annotations
 
-import json
 import logging
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -28,15 +26,15 @@ logger = logging.getLogger(__name__)
 
 try:
     import torch
-    import torch.nn as nn
-    from torch.utils.data import Dataset, DataLoader
+    from torch import nn
+    from torch.utils.data import DataLoader, Dataset
     TORCH_AVAILABLE = True
 except ImportError:
     TORCH_AVAILABLE = False
     logger.warning("PyTorch not installed.  STGCN trainer unavailable.")
 
-from src.models.stgnn.stgcn import STGCN
 from src.models.stgnn.graph_builder import build_all_graphs, describe_graph
+from src.models.stgnn.stgcn import STGCN
 
 FORECAST_HOURS = 24
 
@@ -60,7 +58,7 @@ if TORCH_AVAILABLE:
             df: pd.DataFrame,
             regions: list[str],
             lookback_hours: int = 168,
-            feature_cols: Optional[list[str]] = None,
+            feature_cols: list[str] | None = None,
             demand_col: str = "demand_mw",
             time_col: str = "time_utc",
             region_col: str = "region",
@@ -73,7 +71,6 @@ if TORCH_AVAILABLE:
             if feature_cols is None:
                 skip = {time_col, "time_local", region_col, "DATETIME_LOCAL_OFFSET",
                         "holiday_name", "year"}
-                sample_region = df[region_col].iloc[0]
                 feature_cols = [
                     c for c in df.columns
                     if c not in skip and pd.api.types.is_numeric_dtype(df[c])
@@ -111,7 +108,6 @@ if TORCH_AVAILABLE:
             )
             for feat in self.feature_cols:
                 pivot_dict[feat] = pivot_dict[feat].reindex(common_times).fillna(0.0)
-            n_times = len(common_times)
 
             # Stack into (T, N, F)
             feat_array = np.stack(
@@ -129,13 +125,6 @@ if TORCH_AVAILABLE:
             # Local hour: take from first available region
             first_region = self.regions[0]
             region_df = df[df[region_col] == first_region].sort_values(time_col)
-            if "time_local" in region_df.columns:
-                local_dt = pd.to_datetime(region_df["time_local"])
-            else:
-                local_dt = pd.to_datetime(region_df[time_col])
-
-            time_to_idx = {t: i for i, t in enumerate(common_times)}
-
             # Build a local-time index aligned to common_times
             aligned_local = region_df.set_index(time_col).reindex(common_times)
             if "time_local" in aligned_local.columns:
@@ -164,7 +153,8 @@ if TORCH_AVAILABLE:
                     continue
                 try:
                     next_date = (pd.Timestamp(issue_date) + pd.Timedelta(days=1)).date()
-                except Exception:
+                except (TypeError, ValueError, OverflowError):
+                    logger.warning("Skipping invalid forecast issue date %s", issue_date)
                     continue
 
                 # Find indices for all 24 hours of next_date in local time
@@ -208,12 +198,12 @@ if TORCH_AVAILABLE:
 # ---------------------------------------------------------------------------
 
 def train_stgcn(
-    model: "STGCN",
-    train_dataset: "STGCNDataset",
-    val_dataset: "STGCNDataset",
+    model: STGCN,
+    train_dataset: STGCNDataset,
+    val_dataset: STGCNDataset,
     config: dict,
-    device: "torch.device",
-    checkpoint_path: Optional[Path] = None,
+    device: torch.device,
+    checkpoint_path: Path | None = None,
 ) -> dict:
     """Train a STGCN model with early stopping.
 
@@ -302,10 +292,10 @@ def train_stgcn(
 # ---------------------------------------------------------------------------
 
 def predict_stgcn(
-    model: "STGCN",
-    dataset: "STGCNDataset",
+    model: STGCN,
+    dataset: STGCNDataset,
     batch_size: int = 32,
-    device: Optional["torch.device"] = None,
+    device: torch.device | None = None,
 ) -> pd.DataFrame:
     """Run inference on a dataset and return a tidy prediction DataFrame.
 
@@ -379,7 +369,7 @@ class STGCNTrainer:
         val_df: pd.DataFrame,
         test_df: pd.DataFrame,
         regions: list[str],
-        model_dir: Optional[str | Path] = None,
+        model_dir: str | Path | None = None,
     ) -> dict[str, pd.DataFrame]:
         """Train and evaluate all graph configurations.
 

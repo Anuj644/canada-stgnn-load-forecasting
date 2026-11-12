@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import logging
 from collections import deque
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -71,7 +70,7 @@ class PersistencePlus:
         actual_col: str = "actual",
         region_col: str = "region",
         hour_col: str = "target_hour",
-    ) -> "PersistencePlus":
+    ) -> PersistencePlus:
         """Estimate climatological spread from calibration data."""
         for region in calib_df[region_col].unique():
             self.clim_std[region] = {}
@@ -111,7 +110,7 @@ class PersistencePlus:
         debias_corrected_col: str = "predicted_corrected",
         region_col: str = "region",
         hour_col: str = "target_hour",
-        actual_col: Optional[str] = "actual",
+        actual_col: str | None = "actual",
     ) -> pd.DataFrame:
         """Apply persistence correction and blend with Debias++ correction.
 

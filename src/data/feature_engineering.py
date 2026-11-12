@@ -18,7 +18,6 @@ so that 'hour', 'day_of_week', etc. reflect the region's local time.
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -158,7 +157,7 @@ def add_holiday_features(
 def add_demand_lags(
     df: pd.DataFrame,
     demand_col: str = "demand_mw",
-    lag_hours: Optional[list[int]] = None,
+    lag_hours: list[int] | None = None,
 ) -> pd.DataFrame:
     """Add demand lag features.
 
@@ -188,7 +187,7 @@ def add_demand_lags(
 def add_rolling_features(
     df: pd.DataFrame,
     demand_col: str = "demand_mw",
-    windows: Optional[list[int]] = None,
+    windows: list[int] | None = None,
 ) -> pd.DataFrame:
     """Add rolling mean and rolling std features.
 
@@ -273,9 +272,9 @@ def add_quality_flags(
 
 def build_features(
     df: pd.DataFrame,
-    holiday_df: Optional[pd.DataFrame] = None,
-    lag_hours: Optional[list[int]] = None,
-    rolling_windows: Optional[list[int]] = None,
+    holiday_df: pd.DataFrame | None = None,
+    lag_hours: list[int] | None = None,
+    rolling_windows: list[int] | None = None,
     demand_min: float = 0.0,
     demand_max_multiplier: float = 5.0,
 ) -> pd.DataFrame:

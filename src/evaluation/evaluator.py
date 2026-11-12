@@ -20,12 +20,11 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
 
-from src.evaluation.metrics import compute_metrics, mae, rmse, mape, MAPE_ZERO_THRESHOLD
+from src.evaluation.metrics import MAPE_ZERO_THRESHOLD, compute_metrics
 
 logger = logging.getLogger(__name__)
 
@@ -102,7 +101,7 @@ class ForecastEvaluator:
         region_col: str = "region",
         hour_col: str = "target_hour",
         date_col: str = "forecast_date",
-        holiday_col: Optional[str] = "is_holiday",
+        holiday_col: str | None = "is_holiday",
     ) -> dict:
         """Full evaluation of one model's predictions."""
         df = forecast_df.copy()

@@ -8,7 +8,6 @@ Verifies that every model produces:
 """
 import numpy as np
 import pandas as pd
-import pytest
 
 from src.models.naive import NaiveDay, NaiveWeek
 
@@ -150,7 +149,7 @@ class TestForecastDimensions:
 
 class TestMetricsOutput:
     def test_mae_rmse_mape_finite(self):
-        from src.evaluation.metrics import mae, rmse, mape
+        from src.evaluation.metrics import mae, mape, rmse
         actual = np.array([15000.0, 16000.0, 14000.0])
         predicted = np.array([15100.0, 15800.0, 14200.0])
         assert np.isfinite(mae(actual, predicted))
@@ -173,7 +172,7 @@ class TestMetricsOutput:
         from src.evaluation.metrics import mape
         actual = np.array([0.0, 10000.0])
         predicted = np.array([100.0, 10100.0])
-        val, n_excl = mape(actual, predicted, zero_threshold=10.0)
+        _val, n_excl = mape(actual, predicted, zero_threshold=10.0)
         assert n_excl == 1  # the 0.0 actual should be excluded
 
     def test_mape_handles_all_zero_actual(self):
@@ -186,7 +185,7 @@ class TestMetricsOutput:
         assert n_excl == 2
 
     def test_pinball_loss_q50_equals_mae_half(self):
-        from src.evaluation.metrics import pinball_loss, mae
+        from src.evaluation.metrics import mae, pinball_loss
         actual = np.array([10000.0, 12000.0, 11000.0])
         predicted = np.array([10500.0, 11500.0, 11200.0])
         # Pinball at q=0.5 should equal 0.5 * MAE

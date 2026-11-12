@@ -10,11 +10,9 @@ These tests check that:
 """
 import numpy as np
 import pandas as pd
-import pytest
 
-from src.data.feature_engineering import add_demand_lags, add_rolling_features
-from src.data.pipeline import apply_splits, RegionalStandardScaler
-
+from src.data.feature_engineering import add_demand_lags
+from src.data.pipeline import RegionalStandardScaler, apply_splits
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -64,14 +62,14 @@ class TestNoLookAheadInLags:
 class TestChronologicalSplits:
     def test_train_before_val(self):
         df = make_multiregion_df(n_hours=800)
-        train, val, test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
+        train, val, _test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
         if not val.empty:
             assert train["time_utc"].max() < val["time_utc"].min(), \
                 "Training data leaks into validation period"
 
     def test_val_before_test(self):
         df = make_multiregion_df(n_hours=800)
-        train, val, test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
+        _train, val, test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
         if not val.empty and not test.empty:
             assert val["time_utc"].max() < test["time_utc"].min(), \
                 "Validation data leaks into test period"
@@ -101,7 +99,7 @@ class TestScalerFitOnTrainOnly:
     def test_scaler_uses_train_statistics(self):
         """After fitting on train, the scaled train demand should have ~zero mean."""
         df = make_multiregion_df(n_hours=400)
-        train, val, _ = apply_splits(df, train_end="2022-01-10", val_end="2022-01-14")
+        train, _val, _ = apply_splits(df, train_end="2022-01-10", val_end="2022-01-14")
 
         scaler = RegionalStandardScaler()
         scaler.fit(train, feature_cols=["demand_mw"])
@@ -109,7 +107,7 @@ class TestScalerFitOnTrainOnly:
         # Check stats were computed for each region from train
         for region in train["region"].unique():
             assert region in scaler.stats
-            mean, std = scaler.stats[region]["demand_mw"]
+            mean, _std = scaler.stats[region]["demand_mw"]
             train_region_mean = float(train[train["region"] == region]["demand_mw"].mean())
             # Mean stored should match training mean
             assert abs(mean - train_region_mean) < 1e-3
@@ -126,8 +124,8 @@ class TestScalerFitOnTrainOnly:
         stats_before = {r: dict(v) for r, v in scaler.stats.items()}
         scaler.transform(val, feature_cols=["demand_mw"])
         # Stats must be unchanged
-        for r in stats_before:
-            assert scaler.stats[r] == stats_before[r]
+        for region, stats in stats_before.items():
+            assert scaler.stats[region] == stats
 
 
 # ---------------------------------------------------------------------------
@@ -139,7 +137,7 @@ class TestCorrelationGraphLeakage:
         """The correlation graph function must accept only training data."""
         from src.models.stgnn.graph_builder import build_correlation_graph
         df = make_multiregion_df(n_hours=400)
-        train, val, _ = apply_splits(df, train_end="2022-01-10", val_end="2022-01-14")
+        train, _val, _ = apply_splits(df, train_end="2022-01-10", val_end="2022-01-14")
 
         regions = sorted(df["region"].unique().tolist())
         # This should succeed using only training data
@@ -166,7 +164,7 @@ class TestPeakThresholdNoLeakage:
     def test_threshold_from_train_only(self):
         from src.evaluation.evaluator import compute_peak_thresholds
         df = make_multiregion_df(n_hours=800)
-        train, val, test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
+        train, _val, _test = apply_splits(df, train_end="2022-01-15", val_end="2022-01-20")
         regions = sorted(df["region"].unique().tolist())
         thresholds = compute_peak_thresholds(train, regions, percentile=90)
         for region in regions:

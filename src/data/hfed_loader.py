@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 import yaml
@@ -97,7 +96,7 @@ def load_region(
     demand_variable: str,
     generation_variables: list[str],
     counterpart_area_filter: str = "_Z",
-) -> Optional[pd.DataFrame]:
+) -> pd.DataFrame | None:
     """Load demand + generation variables for one HFED region.
 
     Returns a DataFrame with columns:
@@ -204,7 +203,7 @@ def load_region(
 
 def load_all_regions(
     config: dict,
-    raw_data_dir: Optional[str | Path] = None,
+    raw_data_dir: str | Path | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Load all configured regions.  Returns {region_code: DataFrame}."""
     if raw_data_dir is None:

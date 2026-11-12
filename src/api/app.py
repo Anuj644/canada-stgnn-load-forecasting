@@ -21,9 +21,7 @@ import json
 import logging
 from datetime import date
 from pathlib import Path
-from typing import Optional
 
-import numpy as np
 import pandas as pd
 import yaml
 
@@ -32,7 +30,6 @@ logger = logging.getLogger(__name__)
 try:
     from fastapi import FastAPI, HTTPException, Query
     from fastapi.middleware.cors import CORSMiddleware
-    from fastapi.responses import JSONResponse
     FASTAPI_AVAILABLE = True
 except ImportError:
     FASTAPI_AVAILABLE = False
@@ -49,13 +46,13 @@ class DataStore:
     def __init__(self, results_dir: str = "results", processed_dir: str = "data/processed"):
         self.results_dir = Path(results_dir)
         self.processed_dir = Path(processed_dir)
-        self._predictions: Optional[dict[str, pd.DataFrame]] = None
-        self._comparison: Optional[pd.DataFrame] = None
-        self._peak_thresholds: Optional[dict] = None
-        self._high_demand: Optional[pd.DataFrame] = None
-        self._holidays: Optional[pd.DataFrame] = None
+        self._predictions: dict[str, pd.DataFrame] | None = None
+        self._comparison: pd.DataFrame | None = None
+        self._peak_thresholds: dict | None = None
+        self._high_demand: pd.DataFrame | None = None
+        self._holidays: pd.DataFrame | None = None
 
-    def _parquet_or_none(self, path: Path) -> Optional[pd.DataFrame]:
+    def _parquet_or_none(self, path: Path) -> pd.DataFrame | None:
         if path.exists():
             return pd.read_parquet(path)
         return None
@@ -73,7 +70,7 @@ class DataStore:
                 self._predictions[model_name] = pd.read_parquet(path)
         return self._predictions
 
-    def get_comparison(self) -> Optional[pd.DataFrame]:
+    def get_comparison(self) -> pd.DataFrame | None:
         if self._comparison is None:
             path = self.results_dir / "model_comparison.csv"
             if path.exists():
@@ -89,14 +86,14 @@ class DataStore:
                 self._peak_thresholds = {}
         return self._peak_thresholds
 
-    def get_high_demand(self) -> Optional[pd.DataFrame]:
+    def get_high_demand(self) -> pd.DataFrame | None:
         if self._high_demand is None:
             path = self.results_dir / "high_demand_flags.parquet"
             if path.exists():
                 self._high_demand = pd.read_parquet(path)
         return self._high_demand
 
-    def get_holidays(self) -> Optional[pd.DataFrame]:
+    def get_holidays(self) -> pd.DataFrame | None:
         if self._holidays is None:
             path = Path("data/holidays/holidays_df.parquet")
             if path.exists():
@@ -111,7 +108,7 @@ class DataStore:
 def create_app(
     results_dir: str = "results",
     processed_dir: str = "data/processed",
-) -> "FastAPI":
+) -> FastAPI:
     if not FASTAPI_AVAILABLE:
         raise ImportError("Install fastapi and uvicorn:  pip install fastapi uvicorn")
 
@@ -135,7 +132,7 @@ def create_app(
         with open("config/config.yaml", encoding="utf-8") as f:
             cfg = yaml.safe_load(f)
         REGIONS = cfg["download"]["regions"]
-    except Exception:
+    except (OSError, UnicodeError, yaml.YAMLError, KeyError, TypeError):
         REGIONS = ["AB", "BC", "NB", "NL", "NS", "ON", "PE", "QC", "YK"]
 
     REGION_NAMES = {
@@ -207,7 +204,7 @@ def create_app(
             if comparison is not None and "model" in comparison.columns:
                 model = comparison.iloc[0]["model"]
             else:
-                model = list(preds.keys())[0]
+                model = next(iter(preds))
 
         if model not in preds:
             raise HTTPException(status_code=404, detail=f"Model '{model}' not found.")
@@ -280,7 +277,7 @@ def create_app(
     @app.get("/high-demand/{region}")
     def high_demand_region(
         region: str,
-        forecast_date: Optional[str] = Query(default=None),
+        forecast_date: str | None = Query(default=None),
     ):
         region = region.upper()
         hd = store.get_high_demand()

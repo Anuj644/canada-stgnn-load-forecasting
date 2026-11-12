@@ -19,7 +19,6 @@ No interpolation, forward-fill, or demand imputation is performed here.
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import pandas as pd
 
@@ -29,7 +28,7 @@ logger = logging.getLogger(__name__)
 _META_COLS = {"time_utc", "time_local", "region", "DATETIME_LOCAL_OFFSET"}
 
 
-def detect_native_frequency(df: pd.DataFrame) -> Optional[int]:
+def detect_native_frequency(df: pd.DataFrame) -> int | None:
     """Estimate native interval in minutes from the median time delta.
 
     Returns the median interval in whole minutes, or None if indeterminate.
@@ -47,7 +46,7 @@ def detect_native_frequency(df: pd.DataFrame) -> Optional[int]:
 def resample_to_hourly(
     df: pd.DataFrame,
     min_coverage: float = 0.5,
-    native_freq_minutes: Optional[int] = None,
+    native_freq_minutes: int | None = None,
 ) -> pd.DataFrame:
     """Resample a region DataFrame to hourly UTC.
 
@@ -196,6 +195,6 @@ def resample_all_regions(
                 region,
                 len(result[region]),
             )
-        except Exception as exc:
-            logger.error("Region %s: resampling failed — %s", region, exc)
+        except Exception:
+            logger.exception("Region %s: resampling failed", region)
     return result

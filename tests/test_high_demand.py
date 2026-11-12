@@ -1,10 +1,13 @@
 """Tests for the high-demand detection component."""
 import numpy as np
 import pandas as pd
-import pytest
 
-from src.high_demand.detector import flag_high_demand, high_demand_summary, classify_demand_level
 from src.evaluation.evaluator import compute_peak_thresholds
+from src.high_demand.detector import (
+    classify_demand_level,
+    flag_high_demand,
+    high_demand_summary,
+)
 
 
 def make_forecast_df(regions=("ON", "QC"), n_days: int = 5) -> pd.DataFrame:
