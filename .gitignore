@@ -219,7 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-#custom
-data/
-models/
-results/
+#custom -- root-level generated directories only
+/data/
+/models/
+/results/
