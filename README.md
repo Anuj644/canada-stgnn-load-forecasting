@@ -37,7 +37,11 @@ Saskatchewan (SK) is excluded: it only publishes daily-resolution data, which is
 ```
 canada-stgnn-load-forecasting/
 ├── hfed_dataset_downloader.py   # download raw HFED data from Statistics Canada
-├── train.py                     # end-to-end training pipeline
+├── train.ipynb                  # training, EDA, and evaluation workflow
+├── train.py                     # original command-line workflow
+├── data/                        # raw downloads, holiday cache, processed data
+├── models/                      # saved checkpoints by model family
+├── results/                     # forecasts, metrics, and high-demand flags
 ├── config/
 │   └── config.yaml              # all paths, hyperparameters, feature settings
 ├── src/
@@ -55,8 +59,10 @@ canada-stgnn-load-forecasting/
 │   │   ├── stgnn/
 │   │   │   ├── graph_builder.py # 4 graph configs: identity, geo, corr, ic
 │   │   │   ├── stgcn.py         # STGCN architecture (Yu et al. 2018)
-│   │   │   └── trainer.py       # training loop + ablation runner
-│   │   └── pbc/                 # Phase 8: probabilistic bias correction
+│   │   │   ├── trainer.py       # original training loop and ablation runner
+│   │   │   └── residual.py      # residual STGCN used in the notebook
+│   │   └── pbc/                 # probabilistic bias correction
+│   │       ├── demand.py        # demand CDF calibration used in the notebook
 │   │       ├── debias_plus.py   # Debias++-inspired correction
 │   │       └── persistence_plus.py  # Persistence++-inspired correction
 │   ├── evaluation/
@@ -96,48 +102,39 @@ For PyTorch (LSTM, GRU, STGNN), install the appropriate wheel for your platform:
 # CPU (all platforms)
 pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
 
-# GPU (CUDA 12.1)
-pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu121
+# GPU (CUDA 12.4, on supported NVIDIA hardware)
+pip install torch==2.6.0+cu124 --index-url https://download.pytorch.org/whl/cu124
 ```
 
 ### 2. Download HFED data
 
-Download all history for all regions (~hours depending on connection):
+Download the eight provinces for the configured study period:
 ```bash
-python hfed_dataset_downloader.py
-```
-
-Download a specific date range for faster testing:
-```bash
-python hfed_dataset_downloader.py --start 2020-01-01 --end 2024-12-31
+python hfed_dataset_downloader.py --start 2019-01-01 --end 2024-12-31 --provinces AB BC NB NL NS ON PE QC
 ```
 
 The downloader skips already-completed regions. Use `--overwrite` to re-fetch.
 
-### 3. Run the full training pipeline
+### 3. Run the training notebook
 
 ```bash
-python train.py
+python -m jupyterlab train.ipynb
 ```
 
-Options:
-```bash
-python train.py --skip-dl-models     # skip LSTM/GRU/STGNN (fast run)
-python train.py --only-evaluate      # re-evaluate saved predictions
-python train.py --phases 1 2 3       # run only specific phases
-python train.py --config custom.yaml
-```
+Select the project’s Python kernel and run all cells. The notebook prepares missing processed data and baseline forecasts, then fits the residual STGCN, local XGBoost, and PBC models. To regenerate artifacts from the existing residual checkpoints, set `RETRAIN_NEW_MODELS = False`. To explicitly rebuild processed data or refit the original baselines, enable `REBUILD_DATA` or `RETRAIN_BASELINES`.
+
+The notebook writes checkpoints to `models/stgnn/`, `models/xgboost/`, and `models/pbc/`. It publishes forecasts, the matched `model_comparison.csv`, per-model metrics, and high-demand flags in `results/` for the dashboard and API. Rerunning refreshes these result files.
 
 ### 4. Launch the dashboard
 
 ```bash
-streamlit run dashboard/app.py
+python -m streamlit run dashboard/app.py
 ```
 
 ### 5. Launch the API backend
 
 ```bash
-uvicorn src.api.app:create_app --factory --host 0.0.0.0 --port 8000
+python -m uvicorn src.api.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
 ---
@@ -154,7 +151,7 @@ uvicorn src.api.app:create_app --factory --host 0.0.0.0 --port 8000
 | 6 | Evaluation, comparison, peak-demand analysis | ✅ Complete |
 | 7 | High-demand detection | ✅ Complete |
 | 8 | Interactive dashboard + FastAPI backend | ✅ Complete |
-| 9 | Probabilistic bias correction (optional extension) | ✅ Scaffolded |
+| 9 | Probabilistic bias correction | Implemented in `train.ipynb` |
 
 ---
 
@@ -211,19 +208,13 @@ Key findings:
 
 ## Probabilistic Bias Correction (Phase 9)
 
-Inspired by Mouatadid et al. (2026) *"Advancing subseasonal forecasting with machine learning"* (Nature). **This is an independent adaptation for electricity demand — not a reproduction of the paper.**
-
-Two modules:
-- **Debias++**: Corrects systematic biases estimated from validation-period forecast errors, per region and hour
-- **Persistence++**: Exploits recent error autocorrelation using an exponentially-weighted window
-
-Both produce quantile prediction intervals; isotonic regression enforces non-crossing quantiles (valid CDFs). Outputs are evaluated with CRPS, pinball loss, and prediction interval coverage.
+The notebook adapts Mouatadid et al. (2026) to electricity demand. Debias++ estimates calendar-dependent changes to the residual CDF. Persistence++ adds recent errors from observations available by forecast issuance. The notebook projects each CDF with isotonic regression, averages the two, and evaluates CRPS, pinball loss, and prediction interval coverage. The dashboard reads the intervals from `results/probabilistic_predictions.parquet`.
 
 ---
 
 ## Reproducibility
 
-- All random seeds are set in `config/config.yaml` and passed explicitly to each model
+- Baseline seeds are in `config/config.yaml`. The notebook runs the residual graph experiments with seeds 42 and 123.
 - Scalers, graph statistics, and peak thresholds are fitted on training data only
 - Splits are strictly chronological (no shuffling)
 - Model checkpoints are saved to `models/`

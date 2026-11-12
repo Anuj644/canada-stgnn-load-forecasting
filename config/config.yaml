@@ -16,7 +16,7 @@ paths:
 download:
   # Regions to include in the hourly forecasting cohort
   # SK excluded: daily resolution only
-  # YK included as optional with TOTAL as demand proxy
+  # YK is available in raw downloads but excluded from the eight-region experiment.
   regions:
     - AB
     - BC
@@ -26,7 +26,6 @@ download:
     - "ON"
     - PE
     - QC
-    - YK
   # Primary demand variable per region
   demand_variables:
     AB: INTERNAL_LOAD

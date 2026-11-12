@@ -51,8 +51,7 @@
     "demand_roll_mean_168h",
     "demand_roll_std_168h",
     "IMPORT_CABLES",
-    "ON_ISL_WIND",
-    "THERMAL"
+    "ON_ISL_WIND"
   ],
   "region_dummy_cols": [
     "region_AB",
@@ -64,5 +63,5 @@
     "region_PE",
     "region_QC"
   ],
-  "input_size": 51
+  "input_size": 50
 }
