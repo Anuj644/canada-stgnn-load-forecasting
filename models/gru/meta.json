@@ -1,0 +1,13 @@
+{
+  "all_regions": [
+    "AB",
+    "BC",
+    "NB",
+    "NL",
+    "NS",
+    "ON",
+    "PE",
+    "QC"
+  ],
+  "input_size": 51
+}

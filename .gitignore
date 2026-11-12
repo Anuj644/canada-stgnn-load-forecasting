@@ -221,5 +221,5 @@ __marimo__/
 
 #custom -- root-level generated directories only
 /data/
-/models/
-/results/
+# /models/ -- tracked (model weights)
+# /results/ -- tracked (evaluation outputs)
