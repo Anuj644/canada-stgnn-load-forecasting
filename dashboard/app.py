@@ -8,10 +8,10 @@ Sections:
   E. Model Comparison (MAE / RMSE / MAPE table)
   F. High-Demand Analysis
   G. Forecast Uncertainty (if probabilistic predictions available)
+  H. Forecast from Uploaded Data
 
-All charts and tables are built from actual model predictions loaded
-from the results/ and models/ directories.  No hardcoded illustrative
-data is displayed.
+Historical sections display saved predictions. The upload page generates
+forecasts from user-supplied observations.
 
 Run:
     streamlit run dashboard/app.py
@@ -105,6 +105,162 @@ def _not_ready(msg: str = "No data available yet.  Run the training pipeline fir
     st.stop()
 
 
+@st.cache_data(show_spinner=False, max_entries=16)
+def load_uploaded_forecast(history, region, forecast_date):
+    from src.data.upload_forecast import run_uploaded_forecast
+
+    return run_uploaded_forecast(history, region, forecast_date, ROOT)
+
+
+@st.cache_data(ttl=900, max_entries=16, show_spinner=False)
+def load_hfed_forecast_data(region, forecast_date, config):
+    from src.data.hfed_api import fetch_forecast_observations
+
+    return fetch_forecast_observations(region, forecast_date, config)
+
+
+def render_uploaded_forecast():
+    from src.data.hfed_loader import load_config
+    from src.data.upload_forecast import (
+        has_cached_holidays,
+        TIME_ZONES,
+        hourly_observations,
+        local_time,
+        read_observations,
+    )
+    from src.evaluation.metrics import mae, rmse
+
+    st.title("Forecast and Compare")
+    source = st.selectbox("Data source", ["Statistics Canada HFED API", "CSV upload"])
+    actual_file = None
+    ground_truth = None
+
+    try:
+        config = load_config(ROOT / "config" / "config.yaml")
+        if source == "CSV upload":
+            st.caption("Upload two weeks of hourly HFED demand. Include all eight provinces to show all 12 forecasts.")
+            files = st.file_uploader("Forecast history", type="csv", accept_multiple_files=True)
+            actual_file = st.file_uploader("Ground truth for the forecast date (optional)", type="csv")
+            if not files:
+                return
+            history = read_observations(files, config)
+            regions = sorted(history.loc[history["demand_mw"].notna(), "region"].unique())
+            region = st.selectbox("Province", regions, format_func=REGION_NAMES.get, key="csv_province")
+            observations = hourly_observations(history, region)["demand_mw"].dropna()
+            latest = local_time(pd.Series(observations.index[-1:]), region).iloc[0]
+            forecast_date = st.date_input(
+                "Forecast date (province local time)", (latest + pd.Timedelta(days=1)).date(),
+                key=f"upload_date_{region}_{latest.date()}",
+            )
+        else:
+            regions = config["download"]["regions"]
+            region = st.selectbox("Province", regions, index=regions.index("ON"),
+                                  format_func=REGION_NAMES.get, key="api_province")
+            today = pd.Timestamp.now(tz=TIME_ZONES[region]).date()
+            forecast_date = st.date_input("Forecast date (province local time)", today, key="api_date")
+            with st.spinner("Downloading forecast history and actual demand from HFED…"):
+                history, ground_truth, unavailable = load_hfed_forecast_data(region, forecast_date, config)
+            if unavailable:
+                st.info("HFED data unavailable for " + ", ".join(unavailable) + " in this request.")
+        with st.spinner("Generating next-day forecasts…"):
+            forecasts, graph_note = load_uploaded_forecast(history, region, forecast_date)
+    except (ImportError, KeyError, OSError, RuntimeError, ValueError) as exc:
+        st.error(f"Could not generate the forecast. {exc}")
+        return
+
+    actual = None
+    if actual_file is not None or ground_truth is not None:
+        try:
+            if actual_file is not None:
+                ground_truth = read_observations([actual_file], config)
+            actual = hourly_observations(ground_truth, region)["demand_mw"].reindex(forecasts.index)
+            count = int(actual.notna().sum())
+            if count < 24:
+                st.warning(f"Ground truth covers {count} of 24 forecast hours for {REGION_NAMES[region]}.")
+        except (KeyError, ValueError) as exc:
+            st.error(f"Could not read ground truth. {exc}")
+
+    if graph_note:
+        st.info(graph_note)
+    if not has_cached_holidays(ROOT, forecast_date.year):
+        st.caption("Holiday features default to zero where the local holiday calendar has no coverage.")
+    generation = history.columns.difference(["region", "time_utc", "demand_mw"])
+    provincial_history = history.loc[history["region"].eq(region), generation]
+    if not provincial_history.notna().any().any():
+        st.caption("Generation readings were unavailable for this province. XGBoost uses missing feature values. LSTM and GRU use their zero-fill convention.")
+
+    labels = {
+        "naive_day": "Previous-day naïve",
+        "naive_week": "Weekly naïve",
+        "xgboost": "XGBoost",
+        "lstm": "LSTM",
+        "gru": "GRU",
+        "local_residual_xgboost": "Local residual XGBoost",
+        "residual_stgcn_identity": "Residual STGCN · Identity",
+        "residual_stgcn_geographic": "Residual STGCN · Geographic",
+        "residual_stgcn_interconnection": "Residual STGCN · Interconnection",
+        "residual_stgcn_correlation": "Residual STGCN · Correlation",
+        "stgcn_local_hybrid": "STGCN and local XGBoost hybrid",
+        "pbc": "PBC · Hybrid forecast with 80% prediction interval",
+    }
+    unavailable_models = [label for name, label in labels.items() if name not in forecasts]
+    if unavailable_models:
+        st.caption(f"{len(labels) - len(unavailable_models)} of {len(labels)} forecasts available for this selection.")
+        with st.expander("Unavailable forecasts"):
+            st.write("\n".join(f"- {label}" for label in unavailable_models))
+    if actual is not None:
+        model_names = [name for name in labels if name in forecasts]
+        comparable = forecasts[model_names].assign(actual=actual).dropna()
+        if not comparable.empty:
+            errors = comparable[model_names].sub(comparable["actual"], axis=0).abs().mean()
+            best = errors.min()
+            winners = errors.index[np.isclose(errors, best, rtol=0, atol=1e-9)]
+            names = ", ".join(labels[name] for name in winners)
+            heading = "Best forecast" if len(winners) == 1 else "Best forecasts (tie)"
+            st.success(f"{heading} — {names}")
+            st.caption(
+                f"Lowest mean absolute error: {best:,.2f} MW across "
+                f"{len(comparable)} of {len(forecasts)} hours shared by "
+                f"all {len(model_names)} displayed forecasts. "
+                "MAE measures the average size of the miss in either direction."
+            )
+            runners_up = errors.drop(index=winners)
+            if not runners_up.empty:
+                next_best = runners_up.idxmin()
+                st.caption(f"Next lowest MAE: {labels[next_best]} at {errors[next_best]:,.2f} MW.")
+    hours = list(range(24))
+    for name, label in labels.items():
+        if name not in forecasts:
+            continue
+        fig = go.Figure()
+        if name == "pbc":
+            fig.add_scatter(x=hours, y=forecasts["lower_80"], line={"width": 0},
+                            showlegend=False, hoverinfo="skip")
+            fig.add_scatter(x=hours, y=forecasts["upper_80"], line={"width": 0},
+                            fill="tonexty", fillcolor="rgba(31, 119, 180, 0.18)",
+                            name="80% prediction interval")
+        fig.add_scatter(x=hours, y=forecasts[name], name="Forecast", mode="lines")
+        if actual is not None and actual.notna().any():
+            fig.add_scatter(x=hours, y=actual, name="Ground truth", mode="lines")
+        fig.update_layout(title=label, xaxis_title="Local hour", yaxis_title="Demand (MW)")
+        st.plotly_chart(fig, use_container_width=True, key=f"uploaded_forecast_{name}")
+        if actual is not None:
+            matched = pd.DataFrame({"Forecast (MW)": forecasts[name], "Actual (MW)": actual}).dropna()
+            if not matched.empty:
+                predicted = matched["Forecast (MW)"].to_numpy()
+                measured = matched["Actual (MW)"].to_numpy()
+                st.caption(
+                    f"MAE {mae(measured, predicted):,.1f} MW · "
+                    f"RMSE {rmse(measured, predicted):,.1f} MW · "
+                    f"{len(matched)} of {len(forecasts)} hours matched"
+                )
+                with st.expander(f"Hourly forecast errors · {label}"):
+                    matched["Error (MW)"] = predicted - measured
+                    matched.insert(0, "Local hour", forecasts.index.get_indexer(matched.index))
+                    st.caption("Error = forecast − actual. Positive values mean the forecast was too high.")
+                    st.dataframe(matched.round(1), hide_index=True)
+
+
 # ---------------------------------------------------------------------------
 # Main app
 # ---------------------------------------------------------------------------
@@ -132,8 +288,13 @@ def main():
             "E. Model Comparison",
             "F. High-Demand Analysis",
             "G. Forecast Uncertainty",
+            "H. Forecast from Uploaded Data",
         ],
     )
+
+    if section == "H. Forecast from Uploaded Data":
+        render_uploaded_forecast()
+        return
 
     preds = load_predictions()
     comparison = load_comparison()

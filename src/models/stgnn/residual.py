@@ -23,11 +23,13 @@ TIMEZONES = {
 KEY = ["region", "forecast_date", "target_hour"]
 
 
-def build_examples(data, train, regions):
+def build_examples(data, train, regions, *, stats=None, forecast_dates=None):
     """Build one sample per region and local issue date, with UTC-aligned neighbors."""
     demand = data.pivot(index="time_utc", columns="region", values="demand_mw")
     demand = demand.reindex(columns=regions).asfreq("h")
-    stats = train.groupby("region")["demand_mw"].agg(["mean", "std"]).reindex(regions)
+    if stats is None:
+        stats = train.groupby("region")["demand_mw"].agg(["mean", "std"])
+    stats = stats.reindex(regions)
     center = stats["mean"].to_numpy()
     scale = stats["std"].to_numpy()
     normalized = (demand.to_numpy() - center) / scale
@@ -54,13 +56,15 @@ def build_examples(data, train, regions):
         starts = starts[(starts >= 168) & (starts + 23 < len(demand))]
         for start in starts:
             date = dates[start]
+            if forecast_dates is not None and date not in forecast_dates:
+                continue
             if day_size[date] != 24:
                 continue
             issue = start - 1 - int(minutes > 0)
             if not observed[issue - lookback, node].any():
                 continue
             target = start + target_hours
-            if not observed[target, node].any():
+            if forecast_dates is None and not observed[target, node].any():
                 continue
             lag_positions = target[:, None] - offsets
             # The previous-day final hour can lie after issuance on a half-hour grid.
@@ -98,6 +102,8 @@ def build_examples(data, train, regions):
             labels.append(normalized[target, node])
             node_ids.append(node)
 
+    if not rows:
+        raise ValueError("No complete forecast-day grid with sufficient demand history was found.")
     frame = pd.concat(rows, ignore_index=True)
     tensors = (
         torch.as_tensor(np.asarray(sequences), dtype=torch.float32),
