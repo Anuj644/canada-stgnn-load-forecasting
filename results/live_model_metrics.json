@@ -1,0 +1,120 @@
+{
+  "test_window": "2026-09-01 to 2026-11-13",
+  "n_hours": 10392,
+  "overall": {
+    "Live residual STGCN (retrained on API)": {
+      "mae": 195.88811180535356,
+      "rmse": 405.8698877483765,
+      "mape": 3.6551079784952814,
+      "n_hours": 10392
+    },
+    "Published residual STGCN (interconnection)": {
+      "mae": 203.36546892003648,
+      "rmse": 417.1866542072341,
+      "mape": 3.853372839592694,
+      "n_hours": 10392
+    },
+    "Seasonal naive, previous day": {
+      "mae": 288.69403835282947,
+      "rmse": 603.416188676176,
+      "mape": 4.861774982214411,
+      "n_hours": 10392
+    }
+  },
+  "mape_by_region": {
+    "AB": {
+      "Live residual STGCN (retrained on API)": 1.2160789498751883,
+      "Published residual STGCN (interconnection)": 1.354287319435915,
+      "Seasonal naive, previous day": 1.789799740758978
+    },
+    "NB": {
+      "Live residual STGCN (retrained on API)": 3.8057121720318747,
+      "Published residual STGCN (interconnection)": 4.441201254327491,
+      "Seasonal naive, previous day": 5.176889809538851
+    },
+    "NL": {
+      "Live residual STGCN (retrained on API)": 5.558049527076105,
+      "Published residual STGCN (interconnection)": 5.709491843747393,
+      "Seasonal naive, previous day": 7.092069854531852
+    },
+    "NS": {
+      "Live residual STGCN (retrained on API)": 4.824875725796858,
+      "Published residual STGCN (interconnection)": 4.884204570564039,
+      "Seasonal naive, previous day": 5.8804115769311665
+    },
+    "ON": {
+      "Live residual STGCN (retrained on API)": 2.7783803442660604,
+      "Published residual STGCN (interconnection)": 2.7873259201845992,
+      "Seasonal naive, previous day": 4.2883412408891335
+    },
+    "PE": {
+      "Live residual STGCN (retrained on API)": 5.312733489297021,
+      "Published residual STGCN (interconnection)": 5.618677660918269,
+      "Seasonal naive, previous day": 6.297528348694834
+    },
+    "QC": {
+      "Live residual STGCN (retrained on API)": 2.685062908217534,
+      "Published residual STGCN (interconnection)": 2.8288174055418542,
+      "Seasonal naive, previous day": 3.9881068160090987
+    }
+  },
+  "selected_graph": "geographic",
+  "graph_scores": {
+    "identity": {
+      "selection": {
+        "mae": 175.77477327193228,
+        "rmse": 386.6801986145329,
+        "mape": 2.735878222400041,
+        "n_hours": 11838
+      },
+      "test": {
+        "mae": 192.42788632617916,
+        "rmse": 400.0020242251246,
+        "mape": 3.7364481602720123,
+        "n_hours": 10735
+      }
+    },
+    "geographic": {
+      "selection": {
+        "mae": 175.75333474492226,
+        "rmse": 386.66108090678136,
+        "mape": 2.7360531468366585,
+        "n_hours": 11838
+      },
+      "test": {
+        "mae": 192.40902713311903,
+        "rmse": 400.0003666402137,
+        "mape": 3.7362189483200394,
+        "n_hours": 10735
+      }
+    },
+    "interconnection": {
+      "selection": {
+        "mae": 176.0732281023496,
+        "rmse": 387.5963623488832,
+        "mape": 2.7782945828140213,
+        "n_hours": 11838
+      },
+      "test": {
+        "mae": 194.28337225329483,
+        "rmse": 402.15217418202195,
+        "mape": 3.8045506117437795,
+        "n_hours": 10735
+      }
+    },
+    "correlation": {
+      "selection": {
+        "mae": 179.25834090935552,
+        "rmse": 393.68857517935896,
+        "mape": 2.799373904033214,
+        "n_hours": 11838
+      },
+      "test": {
+        "mae": 195.5952334327654,
+        "rmse": 401.49471450371533,
+        "mape": 3.8585789960840855,
+        "n_hours": 10735
+      }
+    }
+  }
+}

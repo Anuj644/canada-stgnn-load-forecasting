@@ -1,4 +1,10 @@
-"""Fetch forecast history and comparison readings from the HFED API."""
+"""Fetch demand history and comparison readings from the HFED API.
+
+Requests use a filtered SDMX key (``.CA_{code}._Z.{flows}``) so the API only
+returns the province-total series that the models use. The unfiltered ``all``
+key also returns every generator and price series; for Ontario that response
+regularly exceeds the read timeout.
+"""
 
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
@@ -10,31 +16,83 @@ from hfed_dataset_downloader import BASE
 from src.data.upload_forecast import read_observations, target_hours
 
 
-def fetch_forecast_observations(region, forecast_date, config):
-    targets = target_hours(region, forecast_date)
-    start = targets[0] - pd.Timedelta(hours=336)
-    end = targets[-1] + pd.Timedelta(hours=1)
+def series_url(code, flows):
+    """URL for province ``code`` restricted to the given energy-flow codes."""
+    return f"{BASE}/data/CCEI,DF_HFED_{code},1.0/.CA_{code}._Z.{'+'.join(flows)}"
+
+
+def _get_csv(url, start, end, timeout):
     params = {
-        "startPeriod": start.date().isoformat(),
-        "endPeriod": end.date().isoformat(),
+        "startPeriod": pd.Timestamp(start).date().isoformat(),
+        "endPeriod": pd.Timestamp(end).date().isoformat(),
         "format": "csv",
         "dimensionAtObservation": "AllDimensions",
     }
+    with requests.get(url, params=params, timeout=(10, timeout)) as response:
+        if response.status_code == 204 or (
+            response.status_code == 404 and response.text.strip() == "NoRecordsFound"
+        ):
+            return None
+        response.raise_for_status()
+        return response.content
+
+
+def fetch_demand(code, start, end, config, timeout=300):
+    """Hourly province demand in MW, binned to top-of-hour UTC like the training data.
+
+    Returns a DataFrame with ``region``, ``time_utc`` and ``demand_mw``, or None when
+    HFED has no readings for the range.
+    """
+    flow = config["download"]["demand_variables"][code]
+    content = _get_csv(series_url(code, [flow]), start, end, timeout)
+    if content is None:
+        return None
+    readings = read_observations([BytesIO(content)], config)
+    hourly = readings.groupby(readings["time_utc"].dt.floor("h"))["demand_mw"].mean()
+    hourly = hourly.dropna()
+    if hourly.empty:
+        return None
+    return pd.DataFrame({"region": code, "time_utc": hourly.index, "demand_mw": hourly.to_numpy()})
+
+
+def fetch_demand_history(regions, start, end, config, timeout=300):
+    """Fetch hourly demand for several provinces in parallel.
+
+    Returns ``(demand, unavailable)``. A province with no readings, or whose request
+    fails, is listed in ``unavailable`` instead of raising.
+    """
+    def fetch(code):
+        try:
+            return code, fetch_demand(code, start, end, config, timeout)
+        except (requests.RequestException, ValueError):
+            return code, None
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        results = dict(executor.map(fetch, regions))
+    frames = [frame for frame in results.values() if frame is not None]
+    unavailable = [code for code, frame in results.items() if frame is None]
+    demand = (pd.concat(frames, ignore_index=True) if frames
+              else pd.DataFrame(columns=["region", "time_utc", "demand_mw"]))
+    return demand, unavailable
+
+
+def fetch_forecast_observations(region, forecast_date, config):
+    """Two weeks of demand and generation history plus forecast-day readings."""
+    targets = target_hours(region, forecast_date)
+    start = targets[0] - pd.Timedelta(hours=336)
+    end = targets[-1] + pd.Timedelta(hours=1)
+    demand_codes = config["download"]["demand_variables"]
+    generation_codes = config["download"]["generation_variables"]
 
     def fetch(code):
-        url = f"{BASE}/data/CCEI,DF_HFED_{code},1.0/all"
-        with requests.get(url, params=params, timeout=(5, 30)) as response:
-            if response.status_code == 204 or (
-                response.status_code == 404 and response.text.strip() == "NoRecordsFound"
-            ):
-                return None
-            response.raise_for_status()
-            return read_observations([BytesIO(response.content)], config)
+        flows = [demand_codes[code], *generation_codes.get(code, [])]
+        content = _get_csv(series_url(code, flows), start, end, timeout=60)
+        return None if content is None else read_observations([BytesIO(content)], config)
 
     regions = config["download"]["regions"]
     frames = []
     unavailable = []
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {code: executor.submit(fetch, code) for code in regions}
         for code, future in futures.items():
             try:
