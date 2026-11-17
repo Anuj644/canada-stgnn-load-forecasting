@@ -8,6 +8,7 @@ regularly exceeds the read timeout.
 
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
+from time import sleep
 
 import pandas as pd
 import requests
@@ -28,13 +29,23 @@ def _get_csv(url, start, end, timeout):
         "format": "csv",
         "dimensionAtObservation": "AllDimensions",
     }
-    with requests.get(url, params=params, timeout=(10, timeout)) as response:
-        if response.status_code == 204 or (
-            response.status_code == 404 and response.text.strip() == "NoRecordsFound"
-        ):
-            return None
-        response.raise_for_status()
-        return response.content
+    with requests.Session() as session:
+        for attempt in range(3):
+            if attempt:
+                sleep(0.5 * 2 ** (attempt - 1))
+            try:
+                with session.get(url, params=params, timeout=(10, timeout)) as response:
+                    if response.status_code in (429, 500, 502, 503, 504) and attempt < 2:
+                        continue
+                    if response.status_code == 204 or (
+                        response.status_code == 404 and response.text.strip() == "NoRecordsFound"
+                    ):
+                        return None
+                    response.raise_for_status()
+                    return response.content
+            except (requests.Timeout, requests.ConnectionError, requests.exceptions.ChunkedEncodingError):
+                if attempt == 2:
+                    raise
 
 
 def fetch_demand(code, start, end, config, timeout=300):
@@ -58,19 +69,27 @@ def fetch_demand(code, start, end, config, timeout=300):
 def fetch_demand_history(regions, start, end, config, timeout=300):
     """Fetch hourly demand for several provinces in parallel.
 
-    Returns ``(demand, unavailable)``. A province with no readings, or whose request
-    fails, is listed in ``unavailable`` instead of raising.
+    Returns ``(demand, unavailable)``. The second return value maps each unavailable
+    province to a message explaining why no readings could be loaded.
     """
     def fetch(code):
         try:
-            return code, fetch_demand(code, start, end, config, timeout)
-        except (requests.RequestException, ValueError):
-            return code, None
+            frame = fetch_demand(code, start, end, config, timeout)
+        except requests.HTTPError as exc:
+            return None, f"HFED returned HTTP {exc.response.status_code}."
+        except requests.Timeout:
+            return None, "The HFED request timed out."
+        except requests.RequestException:
+            return None, "The dashboard could not complete the connection to HFED."
+        except ValueError as exc:
+            return None, f"The HFED response could not be read. {exc}"
+        return frame, "HFED returned no demand readings for the requested dates." if frame is None else None
 
+    regions = tuple(regions)
     with ThreadPoolExecutor(max_workers=8) as executor:
-        results = dict(executor.map(fetch, regions))
-    frames = [frame for frame in results.values() if frame is not None]
-    unavailable = [code for code, frame in results.items() if frame is None]
+        results = dict(zip(regions, executor.map(fetch, regions), strict=True))
+    frames = [frame for frame, _ in results.values() if frame is not None]
+    unavailable = {code: reason for code, (_, reason) in results.items() if reason is not None}
     demand = (pd.concat(frames, ignore_index=True) if frames
               else pd.DataFrame(columns=["region", "time_utc", "demand_mw"]))
     return demand, unavailable

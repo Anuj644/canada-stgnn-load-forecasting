@@ -213,14 +213,19 @@ def live_forecast(last_day):
     regions = sorted(config["download"]["regions"])
     start = pd.Timestamp(last_day) - pd.Timedelta(days=HISTORY_DAYS)
     end = pd.Timestamp(last_day) + pd.Timedelta(days=3)
-    demand, unavailable = fetch_demand_history(regions, start, end, config, timeout=120)
+    demand, unavailable = fetch_demand_history(regions, start, end, config, timeout=30)
     if demand.empty:
-        raise ValueError("The HFED API returned no demand readings for this period. Try again shortly.")
+        return demand, pd.DataFrame(), unavailable
     year = pd.Timestamp(last_day).year
     holidays = get_holiday_df_for_data_range(
         year - 1, year + 1, hfed_regions=regions, cache_path=ROOT / config["holidays"]["cache_file"],
     )
-    forecast = forecast_next_day(demand, holidays, last_day, ROOT)
+    try:
+        forecast = forecast_next_day(demand, holidays, last_day, ROOT)
+    except ValueError as exc:
+        if "No complete forecast-day grid" not in str(exc):
+            raise
+        forecast = pd.DataFrame()
     return demand, forecast, unavailable
 
 
@@ -277,6 +282,7 @@ def page_live_forecast():
         if chosen_region is None or chosen_day is None:
             st.warning("Select a province and a last observed day, then click Forecast next day.")
             return
+        live_forecast.clear(chosen_day)
         st.session_state["live_request"] = (chosen_region, chosen_day)
     if "live_request" not in st.session_state:
         st.info("Choose a province and the last day with observed demand, then click "
@@ -295,21 +301,18 @@ def page_live_forecast():
     try:
         with st.spinner("Downloading recent demand from the HFED API and running the model..."):
             demand, forecast, unavailable = live_forecast(last_day)
-    except ValueError as exc:
-        message = str(exc)
-        if "No complete forecast-day grid" in message:
-            message = "The API has no demand readings in the two days before this forecast."
-        st.error(f"Could not generate the forecast. {message}")
-        return
-    except (OSError, RuntimeError) as exc:  # network failures from requests subclass OSError
-        st.error(f"Could not reach the HFED API. {exc}")
+    except (OSError, RuntimeError, ValueError) as exc:
+        st.error(f"Could not generate the live forecast. {exc}")
         return
 
-    rows = forecast.loc[forecast["region"].eq(region)].sort_values("target_hour")
+    rows = forecast if forecast.empty else forecast.loc[forecast["region"].eq(region)].sort_values("target_hour")
     if rows.empty:
-        st.warning(f"The HFED API has no recent demand readings for {REGION_NAMES[region]}, so the model "
-                   "cannot forecast it for this day. Pick another province.")
-        _all_provinces(forecast, unavailable, meta)
+        reason = unavailable.get(region)
+        if reason is None:
+            reason = f"The model needs demand readings in the 48 hours ending {last_day:%b %d} at 23:00 local time."
+        st.warning(f"No forecast for {REGION_NAMES[region]}. {reason}")
+        if not forecast.empty:
+            _all_provinces(forecast, meta)
         return
 
     history = demand.loc[demand["region"].eq(region)].copy()
@@ -364,6 +367,19 @@ def page_live_forecast():
 
     tab_hourly, tab_all, tab_model = st.tabs(["Hourly forecast", "All provinces", "About the model"])
     with tab_hourly:
+        daily = go.Figure()
+        hours = rows["target_hour"]
+        daily.add_scatter(x=hours, y=predicted, name="STGCN forecast", mode="lines+markers",
+                          line={"color": FORECAST, "width": 2.4}, marker={"size": 5})
+        if observed.any():
+            daily.add_scatter(x=hours, y=actual, name="Actual demand", mode="lines+markers",
+                              line={"color": ACTUAL, "width": 2.4, "dash": "dot"}, marker={"size": 5})
+        if threshold:
+            daily.add_hline(y=threshold, line={"color": THRESHOLD, "dash": "dash", "width": 1.2})
+        style_figure(daily, height=440)
+        daily.update_xaxes(title="Local hour", dtick=2)
+        st.plotly_chart(daily, width="stretch", key="live_forecast_day")
+
         table = pd.DataFrame({
             "Hour": [f"{hour:02d}:00" for hour in rows["target_hour"]],
             "Forecast (MW)": predicted.round(0),
@@ -374,12 +390,12 @@ def page_live_forecast():
         st.dataframe(table, hide_index=True, width="stretch", height=320)
         st.caption("Error = forecast minus actual. Hours after the latest API reading have no actual yet.")
     with tab_all:
-        _all_provinces(forecast, unavailable, meta)
+        _all_provinces(forecast, meta)
     with tab_model:
         _about_live_model(meta)
 
 
-def _all_provinces(forecast, unavailable, meta):
+def _all_provinces(forecast, meta):
     records = []
     for code, rows in forecast.groupby("region"):
         rows = rows.sort_values("target_hour")
@@ -399,7 +415,7 @@ def _all_provinces(forecast, unavailable, meta):
     st.dataframe(pd.DataFrame(records), hide_index=True, width="stretch")
     missing = sorted(set(meta["regions"]) - set(forecast["region"]))
     if missing:
-        st.caption("No recent API readings, so no forecast: "
+        st.caption("Forecast unavailable for "
                    + ", ".join(REGION_NAMES.get(code, code) for code in missing) + ".")
 
 

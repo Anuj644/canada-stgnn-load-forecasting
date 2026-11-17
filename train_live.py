@@ -55,8 +55,8 @@ def build_dataset(config, regions):
     started = time.time()
     today = pd.Timestamp.now(tz="UTC").tz_localize(None).normalize() + pd.Timedelta(days=1)
     api, unavailable = fetch_demand_history(regions, API_START, today, config)
-    if unavailable:
-        log(f"  No API readings for: {', '.join(unavailable)}")
+    for code, reason in unavailable.items():
+        log(f"  {code}: {reason}")
     log(f"  {len(api):,} hourly readings in {time.time() - started:.0f}s; latest per province:")
     for code, latest in api.groupby("region")["time_utc"].max().items():
         log(f"    {code}: {latest:%Y-%m-%d %H:%M} UTC")
