@@ -1,0 +1,11 @@
+{
+  "purpose": "Lower validation MAE of the selected residual CNN (residual_identity). Written before any search run.",
+  "selection_data": "Validation only. Rolling folds: A = Jan-Jun 2022 (train before), B = Jan-Jun 2023, C = frozen validation Jan-Jun 2024. Train boundary purged so targets mature before first validation issue.",
+  "seeds": [42, 123, 456],
+  "candidates": ["baseline", "weather", "weighted_0.5", "weighted_1.0", "wide", "weather_weighted_0.5"],
+  "acceptance_rule": "Lower mean pooled validation MAE than baseline AND macro provincial MAPE not higher.",
+  "final": "Fit only the best accepted candidate on the frozen split with 3 seeds; evaluate test2024 and test2025 once.",
+  "caveats": ["test2025 was inspected earlier for the frozen v4 run, so it is post-hoc evidence, not blinded.",
+              "Feature scalers use data before 2024, which mildly leaks into folds A and B."],
+  "frozen_artifacts": "results/hfed_extension_eccc_v4 is not modified except additive peak_time_*.csv files."
+}

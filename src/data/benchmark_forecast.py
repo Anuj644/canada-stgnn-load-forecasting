@@ -36,6 +36,7 @@ class ForecastSpec:
 
 SPECS = {
     "cnn": ForecastSpec("Selected residual CNN", "residual_identity"),
+    "cnn_weather": ForecastSpec("Residual CNN + weather channels", "residual_weather", "hfed_cnn_tuning_v1"),
     "graph": ForecastSpec("Seasonal GRU · geographic graph", "seasonal_grid_aware"),
     "calendar": ForecastSpec("Seasonal GRU · demand + weather + calendar", "seasonal_identity"),
     "weather": ForecastSpec("Seasonal GRU · demand + weather", "seasonal_identity", "hfed_ablation_weather_v4", "demand_weather"),
@@ -137,6 +138,9 @@ class BenchmarkForecaster:
                 model = GridAware(self.data, backbone=spec.model.removeprefix("grid_aware_"))
             elif spec.model == "residual_identity":
                 model = TemporalResidual(self.data)
+            elif spec.model == "residual_weather":
+                from src.models.cnn_tuning import ResidualCNN
+                model = ResidualCNN(self.data, weather=True)
             else:
                 graph = self.data if spec.model != "seasonal_identity" else dict(self.data,
                     edge_index=np.empty((2, 0), dtype=np.int64), edge_features=np.empty((0, self.data["edge_features"].shape[1])))

@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HFED = ROOT / "results" / MAIN_RUN
 BRAZIL = ROOT / "results/grid_aware_confirm_v3"
 CONTROLS = ROOT / "results/hfed_temporal_controls_v1"
+TUNING = ROOT / "results/hfed_cnn_tuning_v1"
 REGION_NAMES = {"AB": "Alberta", "BC": "British Columbia", "NB": "New Brunswick", "NL": "Newfoundland and Labrador",
                 "NS": "Nova Scotia", "ON": "Ontario", "PE": "Prince Edward Island", "QC": "Quebec"}
 LABELS = {spec.model: spec.label for key, spec in SPECS.items() if key not in ["demand", "weather"]}
@@ -105,20 +106,24 @@ def forecast_page():
         st.caption("HFED observations are loaded automatically for the selected date.")
     with st.form("verified_forecast_form"):
         a, b = st.columns(2)
-        region = a.selectbox("Province", REGIONS, index=REGIONS.index("ON"), format_func=lambda value: REGION_NAMES[value])
-        now = pd.Timestamp.now(tz=TIMEZONES[region])
+        region = a.selectbox("Province", REGIONS, index=None, placeholder="Select a province", format_func=lambda value: REGION_NAMES[value])
+        now = pd.Timestamp.now(tz=TIMEZONES[region or "ON"])
         maximum = now.date() + timedelta(days=int(now.hour >= 23))
-        day = b.date_input("Forecast date (local)", value=pd.Timestamp("2025-01-15").date(), min_value=pd.Timestamp("2024-01-01").date(), max_value=maximum)
+        day = b.date_input("Forecast date (local)", value=None, min_value=pd.Timestamp("2024-01-01").date(), max_value=maximum)
         uploads = st.file_uploader("HFED history CSVs", type="csv", accept_multiple_files=True,
             help="Include at least eight days of native HFED demand for the selected province.") if source == "Upload HFED CSV" else []
         mode = st.radio("Compare", ["Models and baselines", "Feature ablations"], horizontal=True)
         # The same picker supports models and the four fixed-architecture ablations.
-        chosen = st.multiselect("Forecast curves", list(SPECS), default=["cnn", "lstm", "xgboost", "daily"], format_func=lambda key: SPECS[key].label,
+        chosen = st.multiselect("Forecast curves", list(SPECS), default=[], placeholder="Select forecast curves", format_func=lambda key: SPECS[key].label,
             help="For ablations, the four seasonal GRU stages are selected automatically. The selected CNN is included as a reference.")
-        seed_view = st.selectbox("Forecast member", ["Seed 42", "Seed 123", "Seed 456", "Mean of three seeds"],
+        seed_view = st.selectbox("Forecast member", ["Seed 42", "Seed 123", "Seed 456", "Mean of three seeds"], index=None, placeholder="Select a forecast member",
             help="Benchmark tables average scores over three independently trained models. A mean forecast is an interactive ensemble, not the benchmark's three-seed mean score.")
         submitted = st.form_submit_button("Generate HFED forecast", type="primary")
     if submitted:
+        if region is None or day is None or seed_view is None or (mode == "Models and baselines" and not chosen):
+            st.session_state.pop("verified_request", None)
+            st.warning("Select a province, a forecast date, forecast curves and a forecast member first.")
+            return
         if source == "Upload HFED CSV" and not uploads:
             st.session_state.pop("verified_request", None)
             st.warning("Upload native HFED observations before generating this forecast.")
@@ -150,7 +155,7 @@ def forecast_page():
             st.error(f"Forecast unavailable: {exc}")
             return
     if "verified_request" not in st.session_state:
-        st.info("Select a date and click Generate HFED forecast. Try Ontario on 15 January 2025 to inspect a held-out example with actuals.")
+        st.info("Select a province, a date, forecast curves and a forecast member, then click Generate HFED forecast.")
         return
     region, day, seed_view, result = st.session_state["verified_request"]
     raw, history, issue, targets, origin, notices, holiday = result
@@ -171,12 +176,18 @@ def forecast_page():
     primary = shown.loc[shown.key.eq(primary_key)].sort_values("hour")
     peak = primary.loc[primary.predicted.idxmax()]
     a, b, c, d = st.columns(4)
-    a.metric("Peak forecast", f"{peak.predicted:,.0f} MW", f"{int(peak.hour):02d}:00 local", delta_color="off")
+    peak_note = f"{int(peak.hour):02d}:00 local"
+    if np.isfinite(primary.actual).all():
+        actual_hour = int(primary.loc[primary.actual.idxmax(), "hour"])
+        peak_note += f" · actual {actual_hour:02d}:00 ({int(peak.hour) - actual_hour:+d} h)"
+    elif np.isfinite(primary.actual).any():
+        peak_note += " · actual peak unknown (hours missing)"
+    a.metric("Peak forecast", f"{peak.predicted:,.0f} MW", peak_note, delta_color="off", delta_arrow="off")
     b.metric("Daily forecast energy", f"{primary.predicted.sum()/1000:,.2f} GWh")
     c.metric("High-demand hours", f"{primary.predicted.ge(threshold).sum()} / 24")
     scores = daily_scores(primary)
     d.metric("Day MAE", f"{scores['MAE (MW)']:,.2f} MW" if scores else "Pending actuals",
-             f"{int(scores['Observed hours'])}/24 observed" if scores else "No target labels published", delta_color="off")
+             f"{int(scores['Observed hours'])}/24 observed" if scores else "No target labels published", delta_color="off", delta_arrow="off")
     fig = go.Figure()
     actual = shown.drop_duplicates("hour").sort_values("hour")
     for index, (_, rows) in enumerate(shown.groupby("model", sort=False)):
@@ -184,7 +195,7 @@ def forecast_page():
                         line=dict(color=COLORS[index % len(COLORS)], width=2.5), marker=dict(size=4))
     fig.add_scatter(x=actual.hour, y=actual.actual, name="Actual demand", mode="lines+markers",
                     line=dict(color="#f59e0b", width=3, dash="dot"))
-    fig.add_hline(y=threshold, line_dash="dash", line_color="#ef4444", annotation_text="Training 90th percentile")
+    fig.add_hline(y=threshold, line_dash="dash", line_color="#ef4444", annotation_text="Training 90th percentile", annotation_position="top left")
     fig.update_xaxes(title="Forecast-day local hour", dtick=2, range=[0, 23])
     figure(fig, 500)
     fig.update_layout(margin=dict(l=15, r=15, t=20, b=120),
@@ -229,6 +240,45 @@ def forecast_page():
         st.caption(f"Inference device: {forecaster().device}. CPU fallback can differ slightly from GPU benchmark predictions because of floating-point implementation differences.")
 
 
+def peak_timing(period):
+    """Daily peak hour: when the forecast says demand peaks versus when it did (saved forecasts)."""
+    summary_path = HFED / "peak_time_metrics_mean_std.csv"
+    if not summary_path.exists():
+        st.info("Peak timing results have not been generated. Run `python scripts/report_peak_time.py`.")
+        return
+    table = csv(summary_path).query("period == @period").sort_values("peak_hour_mae_mean")
+    best = table.iloc[0]
+    st.write(f"For each fully observed forecast day ({int(best.n_days):,} days, the same days for every model) the "
+             "daily peak hour is the hour with the highest demand. Timing error is the forecast peak hour minus the actual one.")
+    a, b, c, d = st.columns(4)
+    selected = table.loc[table.model.eq("residual_identity")]
+    row = selected.iloc[0] if len(selected) else best
+    a.metric("Peak-hour error", f"{row.peak_hour_mae_mean:.2f} h", f"{LABELS.get(row.model, row.model)}", delta_color="off", delta_arrow="off")
+    b.metric("Exact peak hour", f"{100*row.peak_hour_exact_mean:.1f}%")
+    c.metric("Within ±1 hour", f"{100*row.peak_hour_within_1h_mean:.1f}%")
+    d.metric("Peak size error", f"{row.peak_size_mae_mw_mean:,.0f} MW")
+    show = pd.DataFrame({"Model": table.model.map(LABELS).fillna(table.model),
+                         "Peak-hour error (h)": table.peak_hour_mae_mean, "± seeds": table.peak_hour_mae_std,
+                         "Exact (%)": 100 * table.peak_hour_exact_mean, "Within ±1 h (%)": 100 * table.peak_hour_within_1h_mean,
+                         "Within ±2 h (%)": 100 * table.peak_hour_within_2h_mean,
+                         "Peak size error (MW)": table.peak_size_mae_mw_mean, "Peak size bias (MW)": table.peak_size_bias_mw_mean,
+                         "Regret (%)": table.peak_regret_pct_mean})
+    st.dataframe(show.round(2), hide_index=True, use_container_width=True)
+    st.caption("Regret: how far real demand at the hour the forecast calls the peak falls below the true daily peak, as a share of the true peak. "
+               "Mean across seeds 42, 123 and 456.")
+    counts = csv(HFED / "peak_time_hour_counts.csv").query("period == @period and model == @row.model")
+    hours = counts.groupby(["kind", "hour"]).days.mean().reset_index()
+    fig = px.bar(hours, x="hour", y="days", color="kind", barmode="group", labels={"days": "Days", "hour": "Local hour of daily peak", "kind": ""},
+                 color_discrete_map={"actual": "#94a3b8", "predicted": "#0d9488"})
+    st.plotly_chart(figure(fig, 340, "Days"), use_container_width=True)
+    regional = csv(HFED / "peak_time_regional_by_seed.csv").query("period == @period and model == @row.model")
+    by_state = regional.groupby("state")[["n_days", "peak_hour_mae", "peak_hour_exact", "peak_hour_within_1h", "peak_size_mae_mw"]].mean()
+    by_state[["peak_hour_exact", "peak_hour_within_1h"]] *= 100
+    st.dataframe(by_state.rename(columns={"n_days": "Days", "peak_hour_mae": "Peak-hour error (h)", "peak_hour_exact": "Exact (%)",
+                                          "peak_hour_within_1h": "Within ±1 h (%)", "peak_size_mae_mw": "Peak size error (MW)"}).round(2),
+                 use_container_width=True)
+
+
 def results_page():
     st.title("Model results and paper comparison")
     st.write("Evidence from the corrected, frozen experiments. Forecasts and reported scores are computed from saved model outputs.")
@@ -242,7 +292,7 @@ def results_page():
         xgb = selected.loc[selected.model.eq("xgboost")].iloc[0]
         coverage = csv(HFED / "regional_coverage.csv").query("period == @period")
         a, b, c, d = st.columns(4)
-        a.metric("Selected CNN MAE", f"{cnn.mae_mean:,.2f} MW", f"± {cnn.mae_std:.2f} across seeds", delta_color="off")
+        a.metric("Selected CNN MAE", f"{cnn.mae_mean:,.2f} MW", f"± {cnn.mae_std:.2f} across seeds", delta_color="off", delta_arrow="off")
         b.metric("vs best Grid-Aware", f"{100*(1-cnn.mae_mean/reference.mae_mean):.1f}% lower MAE")
         c.metric("vs XGBoost", f"{100*(1-cnn.mae_mean/xgb.mae_mean):.1f}% lower MAE")
         d.metric("Matched observed hours", f"{int(coverage.n_obs.sum()):,}")
@@ -252,7 +302,17 @@ def results_page():
         st.plotly_chart(figure(chart, 430, ""), use_container_width=True)
         st.dataframe(metric_table(selected), hide_index=True, use_container_width=True)
         st.caption("Mean ± sample standard deviation across seeds 42, 123 and 456. These are independent-run scores, not an ensemble forecast. Temporal-only LSTM/GRU are supplementary proposal controls added after the primary test was inspected, using fixed published RNN settings and validation-only selection. They are descriptive comparisons, not new blinded confirmations.")
-        detail_tabs = st.tabs(["Paired evidence", "By province and coverage", "Peak demand", "Weather conditions", "Downloads and provenance"])
+        tuned_path = TUNING / "final_metrics_residual_weather.csv"
+        if tuned_path.exists():
+            tuned = csv(tuned_path).query("period == @period")
+            gain = 100 * (1 - tuned.mae.mean() / cnn.mae_mean)
+            st.success(f"Tuned CNN with weather channels: MAE {tuned.mae.mean():,.2f} ± {tuned.mae.std():.2f} MW "
+                       f"({gain:.1f}% lower than the selected CNN), RMSE {tuned.rmse.mean():,.1f} MW. "
+                       "Chosen on rolling validation folds (2022, 2023, Jan–Jun 2024), then fitted once on the frozen split. "
+                       "2025 was already inspected, so its gain is post-hoc evidence. Select it under Forecast curves.")
+        detail_tabs = st.tabs(["Paired evidence", "By province and coverage", "Peak demand", "Weather conditions", "Downloads and provenance", "Peak timing"])
+        with detail_tabs[5]:
+            peak_timing(period)
         with detail_tabs[0]:
             paired = [r for r in document(HFED / "paired_comparisons.json") if r["period"] == period and r["candidate"] == "residual_identity"]
             if (CONTROLS / "paired_with_selected.json").exists():

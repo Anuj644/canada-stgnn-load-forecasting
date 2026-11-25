@@ -744,6 +744,9 @@ def main():
         st.Page(ablation_page, title="Ablation study", icon=":material/query_stats:"),
         st.Page(methods_page, title="Proposal and methods", icon=":material/description:"),
     ])
+    if navigation.title != "HFED forecasts":
+        # Leaving the forecast page clears its result, so coming back starts from an empty form.
+        st.session_state.pop("verified_request", None)
     navigation.run()
 
 
