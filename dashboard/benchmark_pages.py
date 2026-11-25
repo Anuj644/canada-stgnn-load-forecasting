@@ -96,9 +96,13 @@ def run_forecast(region, day, source, keys, seeds, uploads):
 def forecast_page():
     st.title("HFED day-ahead forecasts")
     st.write("Choose the Canadian province and day to forecast. Each forecast is issued at **23:00 local time on the previous day** and covers all 24 next-day hours.")
-    source = st.selectbox("Observation source", ["Automatic", "Frozen archive", "Refresh from HFED API", "Upload HFED CSV"],
-        help="Automatic uses the verified archive through 2025 and the HFED API for later dates. CSV upload is optional; choose it only to use your own native HFED observations.")
-    st.caption("No CSV upload is needed. Automatic loads HFED observations for the selected date; you can optionally select Upload HFED CSV to provide your own history.")
+    manual_upload = st.toggle("Manually upload my own HFED data", value=False)
+    if manual_upload:
+        source = "Upload HFED CSV"
+    else:
+        source = st.selectbox("Observation source", ["Automatic", "Frozen archive", "Refresh from HFED API"],
+            help="Automatic uses the verified archive through 2025 and the HFED API for later dates.")
+        st.caption("HFED observations are loaded automatically for the selected date.")
     with st.form("verified_forecast_form"):
         a, b = st.columns(2)
         region = a.selectbox("Province", REGIONS, index=REGIONS.index("ON"), format_func=lambda value: REGION_NAMES[value])

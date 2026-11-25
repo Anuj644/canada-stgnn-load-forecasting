@@ -23,11 +23,13 @@ def test_date_forecast_and_ablation_curves_render():
     app = page("forecast_page")
     assert not app.get("file_uploader")
     source = next(widget for widget in app.selectbox if widget.label == "Observation source")
-    source.set_value("Upload HFED CSV").run(timeout=120)
+    assert "Upload HFED CSV" not in source.options
+    app.toggle[0].set_value(True).run(timeout=120)
     assert len(app.get("file_uploader")) == 1
+    assert not any(widget.label == "Observation source" for widget in app.selectbox)
     app.button[0].click().run(timeout=120)
     assert any("Upload native HFED" in item.value for item in app.warning)
-    next(widget for widget in app.selectbox if widget.label == "Observation source").set_value("Automatic").run(timeout=120)
+    app.toggle[0].set_value(False).run(timeout=120)
     assert not app.get("file_uploader")
     app.radio[0].set_value("Feature ablations")
     app.button[0].click().run(timeout=120)
