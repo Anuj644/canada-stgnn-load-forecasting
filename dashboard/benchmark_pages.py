@@ -96,15 +96,17 @@ def run_forecast(region, day, source, keys, seeds, uploads):
 def forecast_page():
     st.title("HFED day-ahead forecasts")
     st.write("Choose the Canadian province and day to forecast. Each forecast is issued at **23:00 local time on the previous day** and covers all 24 next-day hours.")
+    source = st.selectbox("Observation source", ["Automatic", "Frozen archive", "Refresh from HFED API", "Upload HFED CSV"],
+        help="Automatic uses the verified archive through 2025 and the HFED API for later dates. CSV upload is optional; choose it only to use your own native HFED observations.")
+    st.caption("No CSV upload is needed. Automatic loads HFED observations for the selected date; you can optionally select Upload HFED CSV to provide your own history.")
     with st.form("verified_forecast_form"):
-        a, b, c = st.columns([1.1, 1, 1.3])
+        a, b = st.columns(2)
         region = a.selectbox("Province", REGIONS, index=REGIONS.index("ON"), format_func=lambda value: REGION_NAMES[value])
         now = pd.Timestamp.now(tz=TIMEZONES[region])
         maximum = now.date() + timedelta(days=int(now.hour >= 23))
         day = b.date_input("Forecast date (local)", value=pd.Timestamp("2025-01-15").date(), min_value=pd.Timestamp("2024-01-01").date(), max_value=maximum)
-        source = c.selectbox("Observation source", ["Automatic", "Frozen archive", "Refresh from HFED API", "Upload HFED CSV"],
-            help="Automatic uses the verified archive through 2025 and the HFED API for later dates. Uploaded files should contain at least eight days of native HFED demand.")
-        uploads = st.file_uploader("HFED history CSVs (only used with Upload HFED CSV)", type="csv", accept_multiple_files=True)
+        uploads = st.file_uploader("HFED history CSVs", type="csv", accept_multiple_files=True,
+            help="Include at least eight days of native HFED demand for the selected province.") if source == "Upload HFED CSV" else []
         mode = st.radio("Compare", ["Models and baselines", "Feature ablations"], horizontal=True)
         # The same picker supports models and the four fixed-architecture ablations.
         chosen = st.multiselect("Forecast curves", list(SPECS), default=["cnn", "lstm", "xgboost", "daily"], format_func=lambda key: SPECS[key].label,

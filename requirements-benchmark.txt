@@ -1,2 +1,2 @@
-# Optional dependency for scripts/benchmark_grid_aware.py; use requirements.txt first.
-torch-geometric==2.6.1
+# Compatibility entry point: benchmark dependencies are in the main requirements.
+-r requirements.txt

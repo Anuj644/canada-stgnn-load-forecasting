@@ -21,6 +21,14 @@ def test_evidence_pages_render_from_real_artifacts(name):
 
 def test_date_forecast_and_ablation_curves_render():
     app = page("forecast_page")
+    assert not app.get("file_uploader")
+    source = next(widget for widget in app.selectbox if widget.label == "Observation source")
+    source.set_value("Upload HFED CSV").run(timeout=120)
+    assert len(app.get("file_uploader")) == 1
+    app.button[0].click().run(timeout=120)
+    assert any("Upload native HFED" in item.value for item in app.warning)
+    next(widget for widget in app.selectbox if widget.label == "Observation source").set_value("Automatic").run(timeout=120)
+    assert not app.get("file_uploader")
     app.radio[0].set_value("Feature ablations")
     app.button[0].click().run(timeout=120)
     assert not app.exception

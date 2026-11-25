@@ -14,7 +14,7 @@ Sources: [author implementation](https://github.com/ugoorji12/Grid-Aware_STGNN_f
 From the repository root in PowerShell:
 
 ```powershell
-.venv/Scripts/python.exe -m pip install -r requirements-benchmark.txt
+.venv/Scripts/python.exe -m pip install -r requirements.txt
 .venv/Scripts/python.exe scripts/download_grid_aware.py
 .venv/Scripts/python.exe scripts/benchmark_grid_aware.py --audit
 .venv/Scripts/python.exe scripts/benchmark_grid_aware.py --output results/grid_aware_pilot_seed42 --epochs 25 --batch-times 64 --patience 6

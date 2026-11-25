@@ -4,6 +4,7 @@
 
 # --- Data download (existing) ---
 requests==2.32.3
+urllib3==2.8.0          # retry handling in benchmark downloaders
 tqdm==4.67.1
 
 # --- Core data processing ---
@@ -20,6 +21,7 @@ xgboost==2.1.4
 # Install torch manually for your platform if the line below does not work:
 #   https://pytorch.org/get-started/locally/
 torch==2.6.0
+torch-geometric==2.6.1  # Grid-Aware graph attention and HFED ablations
 
 # --- API backend ---
 fastapi==0.115.12
