@@ -1,0 +1,2 @@
+# Optional dependency for scripts/benchmark_grid_aware.py; use requirements.txt first.
+torch-geometric==2.6.1

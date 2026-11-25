@@ -1,0 +1,6 @@
+# Keep the cache builder fingerprint identical across platforms.
+src/data/day_ahead_benchmark.py text eol=lf
+src/data/regional_timezones.py text eol=lf
+# Frozen inputs and source snapshots must retain their recorded SHA256 bytes.
+data/** -text
+results/**/source_*.py -text

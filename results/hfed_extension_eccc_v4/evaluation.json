@@ -1,0 +1,482 @@
+[
+  {
+    "model": "grid_aware_lstm",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 255.33655241210337,
+    "rmse": 479.1661166547466,
+    "mape": 8.844116328279627,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 318.5018609186322,
+    "rmse": 638.9652727901313,
+    "mape": 9.476721326896216,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 282.44488754356456,
+    "rmse": 506.13332938829876,
+    "mape": 12.976367571783207,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 335.7242466694019,
+    "rmse": 668.5549700139179,
+    "mape": 13.313816192778077,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 206.7166987364098,
+    "rmse": 440.018232409223,
+    "mape": 3.2377877944030735,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 263.0489718190706,
+    "rmse": 551.9149293488008,
+    "mape": 3.7050456767558986,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 207.1628868313514,
+    "rmse": 441.6030999465521,
+    "mape": 3.217347094451147,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 263.35360124883437,
+    "rmse": 552.0457927199542,
+    "mape": 3.69877686036135,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "residual_identity",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 189.59653934784853,
+    "rmse": 429.0531676888918,
+    "mape": 2.946005884081451,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "residual_identity",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 245.9764377387375,
+    "rmse": 541.091433715489,
+    "mape": 3.443442457128206,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "xgboost",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 217.36124726359643,
+    "rmse": 434.4509935706664,
+    "mape": 4.637387816195472,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "xgboost",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 296.62230231719167,
+    "rmse": 657.8659784651273,
+    "mape": 5.229612387733367,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 309.05933647723424,
+    "rmse": 654.800809717574,
+    "mape": 4.384744618044143,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 382.0167131954144,
+    "rmse": 785.5494425098753,
+    "mape": 5.172152048925032,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_week",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 502.1332772044969,
+    "rmse": 1101.7232699804974,
+    "mape": 6.597563176373083,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_week",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 585.7760235375448,
+    "rmse": 1268.43401220336,
+    "mape": 7.372141876787349,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 263.82308945335586,
+    "rmse": 482.7660895042603,
+    "mape": 9.716953390995915,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 321.56381565913154,
+    "rmse": 633.0522527164459,
+    "mape": 10.109338971318039,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 279.3064225229387,
+    "rmse": 504.9997002814809,
+    "mape": 12.383448548067562,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 337.2783351870595,
+    "rmse": 672.9880356177556,
+    "mape": 13.413693906392988,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 205.0333230514136,
+    "rmse": 435.85812828121186,
+    "mape": 3.2093313637383853,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 261.33618520881635,
+    "rmse": 549.1841003865156,
+    "mape": 3.688553180773582,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 207.07511042937136,
+    "rmse": 445.78916207302115,
+    "mape": 3.2192535961459705,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 260.2823634204805,
+    "rmse": 548.9011943403201,
+    "mape": 3.6937065954276997,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "residual_identity",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 189.44627209066704,
+    "rmse": 422.10784827371805,
+    "mape": 2.9757671913999144,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "residual_identity",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 245.50821113677077,
+    "rmse": 540.2201194045383,
+    "mape": 3.4610420945436844,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "xgboost",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 219.0559871207401,
+    "rmse": 434.6229615015369,
+    "mape": 4.593822781967056,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "xgboost",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 299.8715370549022,
+    "rmse": 660.7672196306285,
+    "mape": 5.286663681922958,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 309.05933647723424,
+    "rmse": 654.800809717574,
+    "mape": 4.384744618044143,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 382.0167131954144,
+    "rmse": 785.5494425098753,
+    "mape": 5.172152048925032,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_week",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 502.1332772044969,
+    "rmse": 1101.7232699804974,
+    "mape": 6.597563176373083,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_week",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 585.7760235375448,
+    "rmse": 1268.43401220336,
+    "mape": 7.372141876787349,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 255.928763319487,
+    "rmse": 480.8048618973915,
+    "mape": 8.52089056220796,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 316.9469429636172,
+    "rmse": 630.9475880153876,
+    "mape": 9.300124989042796,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 317.77654622553945,
+    "rmse": 539.3898913346311,
+    "mape": 16.811765402322553,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 368.73848478786,
+    "rmse": 678.6815154644254,
+    "mape": 17.41951536572886,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 203.94395278734012,
+    "rmse": 440.02746139074935,
+    "mape": 3.2081437624840023,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 262.23340606984914,
+    "rmse": 553.2516695426312,
+    "mape": 3.687337809590812,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 204.7355068726333,
+    "rmse": 438.4705304092545,
+    "mape": 3.1903889388961084,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 264.0087235981612,
+    "rmse": 558.5121883022106,
+    "mape": 3.6947480825886005,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "residual_identity",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 186.03239711610527,
+    "rmse": 415.1605705752458,
+    "mape": 2.9137004013655785,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "residual_identity",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 241.3477636466644,
+    "rmse": 530.2370227967928,
+    "mape": 3.404468559542164,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "xgboost",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 221.16494387566183,
+    "rmse": 436.994423953581,
+    "mape": 4.6167582613293,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "xgboost",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 298.0413772049035,
+    "rmse": 651.001269676077,
+    "mape": 5.228261753316944,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 309.05933647723424,
+    "rmse": 654.800809717574,
+    "mape": 4.384744618044143,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 382.0167131954144,
+    "rmse": 785.5494425098753,
+    "mape": 5.172152048925032,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "naive_week",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 502.1332772044969,
+    "rmse": 1101.7232699804974,
+    "mape": 6.597563176373083,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "naive_week",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 585.7760235375448,
+    "rmse": 1268.43401220336,
+    "mape": 7.372141876787349,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "definition": "Mean observed temperature in the 24h input history; at least 12 observations. Training-only per-province 5th/95th percentiles. This describes conditions at issue, not realized target-day extremes.",
+  "thresholds": {
+    "AB": {
+      "cold_5pct_c": -10.723958283464109,
+      "hot_95pct_c": 22.192916554709274
+    },
+    "BC": {
+      "cold_5pct_c": 1.3379166718324036,
+      "hot_95pct_c": 20.84625000635783
+    },
+    "NB": {
+      "cold_5pct_c": -10.654999956488608,
+      "hot_95pct_c": 21.97916665474574
+    },
+    "NL": {
+      "cold_5pct_c": -4.883333231012025,
+      "hot_95pct_c": 19.76666665772597
+    },
+    "NS": {
+      "cold_5pct_c": -2.129583341379959,
+      "hot_95pct_c": 20.960416713158292
+    },
+    "ON": {
+      "cold_5pct_c": -5.5841666239500025,
+      "hot_95pct_c": 22.936666762034097
+    },
+    "PE": {
+      "cold_5pct_c": -8.002500056227046,
+      "hot_95pct_c": 21.66666675964991
+    },
+    "QC": {
+      "cold_5pct_c": -11.760416415333745,
+      "hot_95pct_c": 23.9499999538064
+    }
+  }
+}

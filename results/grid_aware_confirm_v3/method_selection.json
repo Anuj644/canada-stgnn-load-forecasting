@@ -1,0 +1,23 @@
+{
+  "selected_method": "residual_identity",
+  "criterion": "Lowest mean 24h validation MAE across all predeclared seeds",
+  "validation_period": "2019-01-01 through 2019-06-30",
+  "mean_validation_mae": {
+    "grid_aware_gru": 70.85537465413411,
+    "grid_aware_lstm": 85.48939514160156,
+    "residual_identity": 55.146690368652344,
+    "seasonal_grid_aware": 64.99587376912434,
+    "seasonal_identity": 65.60129292805989
+  },
+  "test_metrics_used": false,
+  "hfed_models": [
+    "grid_aware_lstm",
+    "grid_aware_gru",
+    "seasonal_identity",
+    "seasonal_grid_aware",
+    "residual_identity",
+    "xgboost",
+    "naive_day_available",
+    "naive_week"
+  ]
+}

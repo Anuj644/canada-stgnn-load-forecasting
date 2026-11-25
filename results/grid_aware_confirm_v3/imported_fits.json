@@ -1,0 +1,45 @@
+{
+  "source": "C:\\Users\\ragha\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\Projects\\canada-stgnn-load-forecasting\\results\\grid_aware_confirm_v2",
+  "reason": "Uncaptured CNN with float learning rate; unaffected by captured scheduler bug",
+  "fits": [
+    {
+      "model": "residual_identity",
+      "seed": 42,
+      "epochs": 56,
+      "best_epoch": 46,
+      "best_validation_loss": 0.06992132731671824,
+      "session_seconds": 595.3567686080933,
+      "sha256": {
+        "residual_identity_42_best.pt": "43162f2fca0ed2ea62f39990bb681a6e8ab8771c7dba512021c86778bc1a693e",
+        "residual_identity_42_latest.pt": "ac4a0747f0cd94381d2d2d7d6dbcafe7ae45999e3e30b4e07ac51d522d958ebb",
+        "residual_identity_42_history.json": "fb1db38698be7d7a396b5d5b3093705144010bd2721f9bfd661e39e5af7049a3"
+      }
+    },
+    {
+      "model": "residual_identity",
+      "seed": 123,
+      "epochs": 49,
+      "best_epoch": 39,
+      "best_validation_loss": 0.07146224208606636,
+      "session_seconds": 783.139466047287,
+      "sha256": {
+        "residual_identity_123_best.pt": "e958bd3ba539e74151176dee23e8b92ca5a3d4da1528d04a1679b16720a92be0",
+        "residual_identity_123_latest.pt": "aaffc3ba31c6265e3c674c5e5f14f01962efac3fa8a5ab4f1a946bb983e89249",
+        "residual_identity_123_history.json": "e442f69db31dce25861b1fc9eef7b0dea89ca0832ce02e71cc4393e8112bfe8e"
+      }
+    },
+    {
+      "model": "residual_identity",
+      "seed": 456,
+      "epochs": 59,
+      "best_epoch": 49,
+      "best_validation_loss": 0.07174065149530105,
+      "session_seconds": 1151.168939113617,
+      "sha256": {
+        "residual_identity_456_best.pt": "3f4f8819cafe04939b0c2db78fae1c54f8a8f127c39e996292b03b416c8d8100",
+        "residual_identity_456_latest.pt": "2fac540c173f8fdd1507324d953b7a567af6c1eb96044eb3325d0ec1ecd59554",
+        "residual_identity_456_history.json": "0b10e49e824cbcef18f6f40efa6576a9a2015b224ae288bfe6ccbab3e23d5395"
+      }
+    }
+  ]
+}

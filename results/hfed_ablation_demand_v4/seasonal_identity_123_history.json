@@ -1,0 +1,677 @@
+[
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 1,
+    "train_loss": 0.1692515997325673,
+    "validation_loss": 0.19095886837667655,
+    "validation_mae": 335.77448632326127,
+    "seconds": 0.7962405681610107
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 2,
+    "train_loss": 0.16069717899011016,
+    "validation_loss": 0.18956052043430924,
+    "validation_mae": 338.0076597564998,
+    "seconds": 1.5258853435516357
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 3,
+    "train_loss": 0.15873611204026283,
+    "validation_loss": 0.1894824185658131,
+    "validation_mae": 338.25529330341925,
+    "seconds": 2.219716787338257
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 4,
+    "train_loss": 0.15776721288914283,
+    "validation_loss": 0.18975454667042183,
+    "validation_mae": 337.7450663646769,
+    "seconds": 3.086961269378662
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 5,
+    "train_loss": 0.1570132362768746,
+    "validation_loss": 0.1890705579759938,
+    "validation_mae": 337.7507223181067,
+    "seconds": 3.7678334712982178
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 6,
+    "train_loss": 0.15654292691141458,
+    "validation_loss": 0.18860291531465204,
+    "validation_mae": 336.1066581140729,
+    "seconds": 4.612095355987549
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 7,
+    "train_loss": 0.156431920711101,
+    "validation_loss": 0.18832488909039502,
+    "validation_mae": 335.5397348059011,
+    "seconds": 5.393513202667236
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 8,
+    "train_loss": 0.15615333644413726,
+    "validation_loss": 0.18987095904355758,
+    "validation_mae": 338.6851828932607,
+    "seconds": 6.325161457061768
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 9,
+    "train_loss": 0.1560465196614664,
+    "validation_loss": 0.18844345789153133,
+    "validation_mae": 335.42904178524844,
+    "seconds": 7.262556791305542
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 10,
+    "train_loss": 0.15576280104486565,
+    "validation_loss": 0.18880880711831882,
+    "validation_mae": 336.0002538246092,
+    "seconds": 8.427824258804321
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 11,
+    "train_loss": 0.15564072171324178,
+    "validation_loss": 0.18783328163744673,
+    "validation_mae": 333.35063816442846,
+    "seconds": 10.673462390899658
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 12,
+    "train_loss": 0.1555675013054266,
+    "validation_loss": 0.1875867602915335,
+    "validation_mae": 333.3843990521797,
+    "seconds": 12.690134525299072
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 13,
+    "train_loss": 0.1553374453225741,
+    "validation_loss": 0.18844225680457552,
+    "validation_mae": 333.84947715749325,
+    "seconds": 14.253018617630005
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 14,
+    "train_loss": 0.15424151741683298,
+    "validation_loss": 0.18700721265290268,
+    "validation_mae": 328.743961464054,
+    "seconds": 15.840832471847534
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 15,
+    "train_loss": 0.15162297245980047,
+    "validation_loss": 0.1858559185660007,
+    "validation_mae": 324.6117415399324,
+    "seconds": 16.8258638381958
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 16,
+    "train_loss": 0.14921778292847862,
+    "validation_loss": 0.18290074497216588,
+    "validation_mae": 313.2070680028191,
+    "seconds": 18.105011224746704
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 17,
+    "train_loss": 0.14684077792861513,
+    "validation_loss": 0.18336255972076074,
+    "validation_mae": 308.84183141309626,
+    "seconds": 19.155670642852783
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 18,
+    "train_loss": 0.14559311823394647,
+    "validation_loss": 0.1792627194427863,
+    "validation_mae": 303.59739832887726,
+    "seconds": 19.978548049926758
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 19,
+    "train_loss": 0.14498673914571295,
+    "validation_loss": 0.17965061966293147,
+    "validation_mae": 303.87939526949094,
+    "seconds": 20.950077772140503
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 20,
+    "train_loss": 0.14434650226643211,
+    "validation_loss": 0.18001904752055556,
+    "validation_mae": 303.1679354133547,
+    "seconds": 21.882993698120117
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 21,
+    "train_loss": 0.1440776091518786,
+    "validation_loss": 0.18027715912654416,
+    "validation_mae": 309.68211600874633,
+    "seconds": 22.85374617576599
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 22,
+    "train_loss": 0.1438185468362212,
+    "validation_loss": 0.1780831693428349,
+    "validation_mae": 301.96291304725946,
+    "seconds": 24.289390087127686
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 23,
+    "train_loss": 0.1436759847282625,
+    "validation_loss": 0.18407566434720665,
+    "validation_mae": 323.4575549668156,
+    "seconds": 25.7334988117218
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 24,
+    "train_loss": 0.14307583561714957,
+    "validation_loss": 0.17946498855934312,
+    "validation_mae": 306.860272787848,
+    "seconds": 26.814534664154053
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 25,
+    "train_loss": 0.1424297334701284,
+    "validation_loss": 0.1787706718536143,
+    "validation_mae": 304.7754280581588,
+    "seconds": 28.04446530342102
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 26,
+    "train_loss": 0.14207140439342789,
+    "validation_loss": 0.17840589230269863,
+    "validation_mae": 305.26986594818163,
+    "seconds": 29.189414739608765
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 27,
+    "train_loss": 0.14196185054886082,
+    "validation_loss": 0.17963613741533635,
+    "validation_mae": 309.7647801917967,
+    "seconds": 30.144795417785645
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 28,
+    "train_loss": 0.14136505519088946,
+    "validation_loss": 0.17831255635826435,
+    "validation_mae": 303.7482300745583,
+    "seconds": 31.078149795532227
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 29,
+    "train_loss": 0.1392758674112267,
+    "validation_loss": 0.1771563262588455,
+    "validation_mae": 302.65729990890975,
+    "seconds": 32.081812620162964
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 30,
+    "train_loss": 0.13919368450855693,
+    "validation_loss": 0.1772320825060138,
+    "validation_mae": 303.8753968551746,
+    "seconds": 33.426536560058594
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 31,
+    "train_loss": 0.1389953255561114,
+    "validation_loss": 0.17683923812458294,
+    "validation_mae": 303.39047590427856,
+    "seconds": 34.58142113685608
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 32,
+    "train_loss": 0.1389806172104074,
+    "validation_loss": 0.1764272062920081,
+    "validation_mae": 302.87189892479694,
+    "seconds": 35.43482708930969
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 33,
+    "train_loss": 0.13883364168298504,
+    "validation_loss": 0.17643765097561961,
+    "validation_mae": 303.33800573268707,
+    "seconds": 36.387327432632446
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 34,
+    "train_loss": 0.13874795387034813,
+    "validation_loss": 0.1761067552149886,
+    "validation_mae": 302.7741887542569,
+    "seconds": 37.271122217178345
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 35,
+    "train_loss": 0.13858574056772993,
+    "validation_loss": 0.17632277677475974,
+    "validation_mae": 303.71035580955675,
+    "seconds": 38.65722036361694
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 36,
+    "train_loss": 0.13851469485291018,
+    "validation_loss": 0.17622506423930312,
+    "validation_mae": 304.57155310668,
+    "seconds": 39.528968334198
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 37,
+    "train_loss": 0.13823602074070981,
+    "validation_loss": 0.17537120833452255,
+    "validation_mae": 302.6388049755008,
+    "seconds": 40.41161847114563
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 38,
+    "train_loss": 0.13828082202757844,
+    "validation_loss": 0.17481692004200086,
+    "validation_mae": 301.7590579848604,
+    "seconds": 41.421541929244995
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 39,
+    "train_loss": 0.13811712253019906,
+    "validation_loss": 0.17484760514642617,
+    "validation_mae": 302.5516104103902,
+    "seconds": 42.3556113243103
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 40,
+    "train_loss": 0.13809479909138783,
+    "validation_loss": 0.17507408228538843,
+    "validation_mae": 302.9162313071601,
+    "seconds": 43.32162165641785
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 41,
+    "train_loss": 0.13795686077222735,
+    "validation_loss": 0.17470595615573706,
+    "validation_mae": 302.127224479213,
+    "seconds": 44.351245403289795
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 42,
+    "train_loss": 0.13778702195030249,
+    "validation_loss": 0.17481115196029634,
+    "validation_mae": 303.41019070124435,
+    "seconds": 45.322747230529785
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 43,
+    "train_loss": 0.13775722281113498,
+    "validation_loss": 0.17426678830408532,
+    "validation_mae": 302.3576042060395,
+    "seconds": 46.29385757446289
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 44,
+    "train_loss": 0.13766358089244032,
+    "validation_loss": 0.1740301373732425,
+    "validation_mae": 300.98841242528425,
+    "seconds": 47.32170224189758
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 45,
+    "train_loss": 0.13728551769588754,
+    "validation_loss": 0.17411847264952865,
+    "validation_mae": 301.1418643183772,
+    "seconds": 48.24833846092224
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 46,
+    "train_loss": 0.13742426397630675,
+    "validation_loss": 0.17368578263197867,
+    "validation_mae": 300.81793811444805,
+    "seconds": 49.15047812461853
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 47,
+    "train_loss": 0.13741216008139098,
+    "validation_loss": 0.17357352904738635,
+    "validation_mae": 302.79508428800915,
+    "seconds": 50.148154973983765
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 48,
+    "train_loss": 0.1373127442856691,
+    "validation_loss": 0.17362097056411832,
+    "validation_mae": 301.72729732477694,
+    "seconds": 51.039228439331055
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 49,
+    "train_loss": 0.13727958588039174,
+    "validation_loss": 0.17324496562770822,
+    "validation_mae": 301.16370215156417,
+    "seconds": 51.90799045562744
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 50,
+    "train_loss": 0.13697158519882166,
+    "validation_loss": 0.17362083968309183,
+    "validation_mae": 304.20984921703615,
+    "seconds": 52.97247838973999
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 51,
+    "train_loss": 0.13717392760533667,
+    "validation_loss": 0.17325872569157746,
+    "validation_mae": 302.0108933676665,
+    "seconds": 53.88298201560974
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 52,
+    "train_loss": 0.13701827247445428,
+    "validation_loss": 0.1731913090801357,
+    "validation_mae": 303.06754235939724,
+    "seconds": 54.809701442718506
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 53,
+    "train_loss": 0.13703529742018727,
+    "validation_loss": 0.1726885104429767,
+    "validation_mae": 300.86093824692614,
+    "seconds": 55.80139446258545
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 54,
+    "train_loss": 0.13681515869064598,
+    "validation_loss": 0.17281071047977692,
+    "validation_mae": 301.125918892854,
+    "seconds": 56.808950901031494
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 55,
+    "train_loss": 0.1367394838355274,
+    "validation_loss": 0.17284381732770476,
+    "validation_mae": 302.5790138710553,
+    "seconds": 57.78024911880493
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 56,
+    "train_loss": 0.1370967945816347,
+    "validation_loss": 0.1722264944160591,
+    "validation_mae": 300.61276317855635,
+    "seconds": 58.862956523895264
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 57,
+    "train_loss": 0.1367009784968645,
+    "validation_loss": 0.1718503048884887,
+    "validation_mae": 299.35449595108133,
+    "seconds": 59.96207332611084
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 58,
+    "train_loss": 0.1367382713285024,
+    "validation_loss": 0.17256788001348825,
+    "validation_mae": 301.77368757550323,
+    "seconds": 60.842756271362305
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 59,
+    "train_loss": 0.13660689417976343,
+    "validation_loss": 0.17211345055130725,
+    "validation_mae": 300.35042298890426,
+    "seconds": 61.775917530059814
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 60,
+    "train_loss": 0.1366567670514709,
+    "validation_loss": 0.17218040530383763,
+    "validation_mae": 301.0791173116403,
+    "seconds": 62.64810132980347
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 61,
+    "train_loss": 0.13653337037415697,
+    "validation_loss": 0.1717081496064192,
+    "validation_mae": 300.3877883453351,
+    "seconds": 63.504863262176514
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 62,
+    "train_loss": 0.13642765786902455,
+    "validation_loss": 0.1726533342572498,
+    "validation_mae": 302.20018793009046,
+    "seconds": 64.3943703174591
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 63,
+    "train_loss": 0.13649622011849016,
+    "validation_loss": 0.1716979987975433,
+    "validation_mae": 298.76342756067123,
+    "seconds": 65.26434636116028
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 64,
+    "train_loss": 0.13668026394519275,
+    "validation_loss": 0.17232358221618022,
+    "validation_mae": 302.92244463250773,
+    "seconds": 66.39457893371582
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 65,
+    "train_loss": 0.13642174346897254,
+    "validation_loss": 0.17101536908773507,
+    "validation_mae": 298.2086745454057,
+    "seconds": 67.22887229919434
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 66,
+    "train_loss": 0.13646128815209532,
+    "validation_loss": 0.17194652953778744,
+    "validation_mae": 301.4378950312852,
+    "seconds": 68.3974175453186
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 67,
+    "train_loss": 0.13612760229745516,
+    "validation_loss": 0.1722563283234573,
+    "validation_mae": 304.2042945763203,
+    "seconds": 69.43168616294861
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 68,
+    "train_loss": 0.13620754186029405,
+    "validation_loss": 0.17145834716767352,
+    "validation_mae": 300.36958935969557,
+    "seconds": 70.99311947822571
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 69,
+    "train_loss": 0.13625355519285143,
+    "validation_loss": 0.17103608691954222,
+    "validation_mae": 299.145907186379,
+    "seconds": 72.32270216941833
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 70,
+    "train_loss": 0.1361697854549154,
+    "validation_loss": 0.17225438506197466,
+    "validation_mae": 303.8156296060445,
+    "seconds": 73.53991103172302
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 71,
+    "train_loss": 0.1362379084430612,
+    "validation_loss": 0.1714230971310372,
+    "validation_mae": 301.0563101825603,
+    "seconds": 74.78762102127075
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 72,
+    "train_loss": 0.1358637662587151,
+    "validation_loss": 0.17132014027586523,
+    "validation_mae": 300.7693729914056,
+    "seconds": 75.75889706611633
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 73,
+    "train_loss": 0.13568262202267306,
+    "validation_loss": 0.17128672003242437,
+    "validation_mae": 300.77329538137934,
+    "seconds": 76.55320143699646
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 74,
+    "train_loss": 0.13567081499764055,
+    "validation_loss": 0.1712659894476935,
+    "validation_mae": 300.7641930007347,
+    "seconds": 77.29486346244812
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "epoch": 75,
+    "train_loss": 0.13562053056785567,
+    "validation_loss": 0.1712181326388415,
+    "validation_mae": 300.70117032614155,
+    "seconds": 78.06904864311218
+  }
+]

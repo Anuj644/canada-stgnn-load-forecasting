@@ -1,0 +1,7 @@
+{
+  "model": "naive_week",
+  "seed": 42,
+  "epochs": 0,
+  "best_epoch": 0,
+  "validation_loss": null
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "model": "temporal_lstm",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 251.12102391146817,
+    "rmse": 469.5784609240642,
+    "mape": 7.825760882118443,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 312.33816888711806,
+    "rmse": 618.0205230547017,
+    "mape": 8.315670328802678,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 266.4731489129268,
+    "rmse": 493.8335883415886,
+    "mape": 9.39105426308051,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 325.6586073247059,
+    "rmse": 645.9625672227603,
+    "mape": 10.134714540467852,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 254.04832195783246,
+    "rmse": 471.90902310168605,
+    "mape": 8.237515204658603,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 320.14255542725243,
+    "rmse": 630.2689855747993,
+    "mape": 8.792470994594279,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 266.12688829960445,
+    "rmse": 490.66505011261006,
+    "mape": 10.929167412746164,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 318.88653312682703,
+    "rmse": 628.6404228443355,
+    "mape": 11.279119748469746,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 250.83475691629394,
+    "rmse": 465.03798002301113,
+    "mape": 9.261713132352519,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 306.91436304232985,
+    "rmse": 614.4727030984308,
+    "mape": 9.426934747238155,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 263.7048816748847,
+    "rmse": 494.05841581639106,
+    "mape": 9.070842297922812,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 322.4860605646358,
+    "rmse": 647.391933751783,
+    "mape": 9.811111973924422,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  }
+]

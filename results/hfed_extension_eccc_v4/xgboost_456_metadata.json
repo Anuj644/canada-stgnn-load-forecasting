@@ -1,0 +1,8 @@
+{
+  "model": "xgboost",
+  "seed": 456,
+  "epochs": 500,
+  "best_epoch": 479,
+  "validation_loss": 257.55244417845336,
+  "n_features": 86
+}

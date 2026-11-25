@@ -1,0 +1,16 @@
+model,seed,best_epoch,validation_24h_mae
+grid_aware_lstm,42,6,84.39979553222656
+grid_aware_gru,42,39,69.72085571289062
+seasonal_identity,42,1,64.89954376220703
+seasonal_grid_aware,42,1,63.65481948852539
+residual_identity,42,46,54.780548095703125
+grid_aware_lstm,123,12,88.4600601196289
+grid_aware_gru,123,39,71.7759017944336
+seasonal_identity,123,1,65.0401840209961
+seasonal_grid_aware,123,1,65.3988265991211
+residual_identity,123,39,55.162899017333984
+grid_aware_lstm,456,5,83.60832977294922
+grid_aware_gru,456,57,71.06936645507812
+seasonal_identity,456,1,66.86415100097656
+seasonal_grid_aware,456,1,65.93397521972656
+residual_identity,456,49,55.49662399291992

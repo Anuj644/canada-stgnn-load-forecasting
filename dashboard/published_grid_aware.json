@@ -1,0 +1,12 @@
+{
+  "source": "https://energy.acm.org/eir/grid-aware-spatio-temporal-graph-neural-networks-for-multi-horizon-load-forecasting/",
+  "table": "Table 3, ACM SIGENERGY Energy Informatics Review 5(3), September 2025",
+  "scores": [
+    {"model": "Published GAT_LSTM", "horizon": 1, "MAE (MW)": 31.79, "RMSE (MW)": 58.53, "MAPE (%)": 2.50},
+    {"model": "Published GAT_GRU", "horizon": 1, "MAE (MW)": 33.15, "RMSE (MW)": 59.48, "MAPE (%)": 2.85},
+    {"model": "Published GAT_LSTM", "horizon": 6, "MAE (MW)": 48.95, "RMSE (MW)": 94.55, "MAPE (%)": 3.56},
+    {"model": "Published GAT_GRU", "horizon": 6, "MAE (MW)": 53.14, "RMSE (MW)": 99.26, "MAPE (%)": 4.44},
+    {"model": "Published GAT_LSTM", "horizon": 24, "MAE (MW)": 64.44, "RMSE (MW)": 151.10, "MAPE (%)": 3.93},
+    {"model": "Published GAT_GRU", "horizon": 24, "MAE (MW)": 63.70, "RMSE (MW)": 146.30, "MAPE (%)": 4.54}
+  ]
+}

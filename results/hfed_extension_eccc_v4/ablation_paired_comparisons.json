@@ -1,0 +1,110 @@
+[
+  {
+    "period": "test2024",
+    "before": "demand",
+    "after": "demand_weather",
+    "candidate": "seasonal_identity",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 234.7353820276212,
+    "reference_mean_mae": 249.1120105889415,
+    "improvement_percent": 5.77115030597345,
+    "paired_mae_difference": -14.37662856132027,
+    "week_block_95pct_ci": [
+      -24.321991826439653,
+      -5.139020165422571
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 30882
+  },
+  {
+    "period": "test2024",
+    "before": "demand_weather",
+    "after": "demand_weather_calendar",
+    "candidate": "seasonal_identity",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 205.2313248583878,
+    "reference_mean_mae": 234.7353820276212,
+    "improvement_percent": 12.569071144869703,
+    "paired_mae_difference": -29.504057169233352,
+    "week_block_95pct_ci": [
+      -36.204462259556294,
+      -22.811063712331908
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 30882
+  },
+  {
+    "period": "test2024",
+    "before": "demand_weather_calendar",
+    "after": "demand_weather_calendar_graph",
+    "candidate": "seasonal_grid_aware",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 206.32450137778537,
+    "reference_mean_mae": 205.2313248583878,
+    "improvement_percent": -0.5326557825185096,
+    "paired_mae_difference": 1.0931765193975034,
+    "week_block_95pct_ci": [
+      -0.8094297785593005,
+      3.1111006037690645
+    ],
+    "lower_mae_each_seed": false,
+    "n_observations_per_seed": 30882
+  },
+  {
+    "period": "test2025",
+    "before": "demand",
+    "after": "demand_weather",
+    "candidate": "seasonal_identity",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 295.6659569905735,
+    "reference_mean_mae": 322.18867567932494,
+    "improvement_percent": 8.232045596521708,
+    "paired_mae_difference": -26.522718688751397,
+    "week_block_95pct_ci": [
+      -34.82102311589012,
+      -18.914847852178138
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 56809
+  },
+  {
+    "period": "test2025",
+    "before": "demand_weather",
+    "after": "demand_weather_calendar",
+    "candidate": "seasonal_identity",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 262.20618769924533,
+    "reference_mean_mae": 295.6659569905735,
+    "improvement_percent": 11.316747329282462,
+    "paired_mae_difference": -33.45976929132816,
+    "week_block_95pct_ci": [
+      -44.67382031136899,
+      -24.393370322233558
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 56809
+  },
+  {
+    "period": "test2025",
+    "before": "demand_weather_calendar",
+    "after": "demand_weather_calendar_graph",
+    "candidate": "seasonal_grid_aware",
+    "reference": "seasonal_identity",
+    "horizon": "all24",
+    "candidate_mean_mae": 262.54822942249206,
+    "reference_mean_mae": 262.20618769924533,
+    "improvement_percent": -0.13044761691094475,
+    "paired_mae_difference": 0.3420417232466757,
+    "week_block_95pct_ci": [
+      -1.1158068608031146,
+      1.8466702012850127
+    ],
+    "lower_mae_each_seed": false,
+    "n_observations_per_seed": 56809
+  }
+]

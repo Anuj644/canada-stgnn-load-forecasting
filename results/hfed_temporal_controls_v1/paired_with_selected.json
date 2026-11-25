@@ -1,0 +1,70 @@
+[
+  {
+    "period": "test2024",
+    "scope": "Supplementary, after primary test inspection",
+    "candidate": "residual_identity",
+    "reference": "temporal_lstm",
+    "horizon": "all24",
+    "candidate_mean_mae": 188.3584028515403,
+    "reference_mean_mae": 252.0013675951982,
+    "improvement_percent": 25.255007681502196,
+    "paired_mae_difference": -63.642964743657906,
+    "week_block_95pct_ci": [
+      -74.95712012581788,
+      -52.19638290333324
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 30882
+  },
+  {
+    "period": "test2024",
+    "scope": "Supplementary, after primary test inspection",
+    "candidate": "residual_identity",
+    "reference": "temporal_gru",
+    "horizon": "all24",
+    "candidate_mean_mae": 188.3584028515403,
+    "reference_mean_mae": 265.43497296247193,
+    "improvement_percent": 29.037835237268816,
+    "paired_mae_difference": -77.07657011093166,
+    "week_block_95pct_ci": [
+      -90.024103272359,
+      -64.51273051051153
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 30882
+  },
+  {
+    "period": "test2025",
+    "scope": "Supplementary, after primary test inspection",
+    "candidate": "residual_identity",
+    "reference": "temporal_lstm",
+    "horizon": "all24",
+    "candidate_mean_mae": 244.2774708407242,
+    "reference_mean_mae": 313.13169578556676,
+    "improvement_percent": 21.988903030753583,
+    "paired_mae_difference": -68.85422494484256,
+    "week_block_95pct_ci": [
+      -80.79268945119539,
+      -58.01925322731647
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 56809
+  },
+  {
+    "period": "test2025",
+    "scope": "Supplementary, after primary test inspection",
+    "candidate": "residual_identity",
+    "reference": "temporal_gru",
+    "horizon": "all24",
+    "candidate_mean_mae": 244.2774708407242,
+    "reference_mean_mae": 322.34373367205626,
+    "improvement_percent": 24.218328038216054,
+    "paired_mae_difference": -78.066262831332,
+    "week_block_95pct_ci": [
+      -90.30813685879961,
+      -68.00777020764887
+    ],
+    "lower_mae_each_seed": true,
+    "n_observations_per_seed": 56809
+  }
+]

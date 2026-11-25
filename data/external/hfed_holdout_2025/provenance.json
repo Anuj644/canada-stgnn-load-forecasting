@@ -1,0 +1,66 @@
+[
+  {
+    "region": "AB",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_AB,1.0/.CA_AB._Z.INTERNAL_LOAD",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 75735,
+    "sha256": "d3c9781500c84f9c86255a9cce5e4b69bb18f54f0f63cb152f839317d60db203"
+  },
+  {
+    "region": "BC",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_BC,1.0/.CA_BC._Z.LOAD",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 8760,
+    "sha256": "dbceb53877b28fb85e9d5537e9f68c7a8605e2fdf970ded9c1a4364709430618"
+  },
+  {
+    "region": "NB",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_NB,1.0/.CA_NB._Z.DEMAND",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 98614,
+    "sha256": "a5854dc94737366bed8e3c6a59a66e7f3c7b0500ddbc96e3508fd0309826ee5e"
+  },
+  {
+    "region": "NL",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_NL,1.0/.CA_NL._Z.DEMAND",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 71553,
+    "sha256": "3f81105c9122eef4fd1a1c4cbdb6391056d673a47810e2fd79aa6cfd40e8bddc"
+  },
+  {
+    "region": "NS",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_NS,1.0/.CA_NS._Z.LOAD",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 11600,
+    "sha256": "91839af7a03b85499cb0f1b0ac19c0904a01184f7195311f8e06617e955f57b8"
+  },
+  {
+    "region": "ON",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_ON,1.0/.CA_ON._Z.ONTARIO_DEMAND",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 17499,
+    "sha256": "426af8b7eb1ca0e528d5f66da3b7817595fa1d2707c499da06aaaa0b51190c74"
+  },
+  {
+    "region": "PE",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_PE,1.0/.CA_PE._Z.ON_ISL_LOAD",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 33816,
+    "sha256": "0a4b8886377367e7d98b55ef2100bdb8a3d9c58f80392b493b1467d8be5da696"
+  },
+  {
+    "region": "QC",
+    "url": "https://api.statcan.gc.ca/hfed-dehf/sdmx/rest/data/CCEI,DF_HFED_QC,1.0/.CA_QC._Z.DEMAND",
+    "startPeriod": "2025-01-01",
+    "endPeriod": "2025-12-31",
+    "rows": 34567,
+    "sha256": "42d4f2a12594d7172a693c70ed8285949b1c12d43f461efee39a870915f8b244"
+  }
+]

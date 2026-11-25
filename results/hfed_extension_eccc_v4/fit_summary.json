@@ -1,0 +1,173 @@
+[
+  {
+    "model": "grid_aware_lstm",
+    "seed": 42,
+    "best_epoch": 52,
+    "epochs": 62,
+    "validation_loss": 0.0015770936101376417
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 42,
+    "best_epoch": 45,
+    "epochs": 55,
+    "validation_loss": 0.0017358030811899506
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "best_epoch": 40,
+    "epochs": 50,
+    "validation_loss": 0.12418981735127087
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 42,
+    "best_epoch": 40,
+    "epochs": 50,
+    "validation_loss": 0.1250459456422715
+  },
+  {
+    "model": "residual_identity",
+    "seed": 42,
+    "best_epoch": 35,
+    "epochs": 45,
+    "validation_loss": 0.11241113229692389
+  },
+  {
+    "model": "xgboost",
+    "seed": 42,
+    "epochs": 500,
+    "best_epoch": 500,
+    "validation_loss": 256.2133446999551,
+    "n_features": 86
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 42,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  },
+  {
+    "model": "naive_week",
+    "seed": 42,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 123,
+    "best_epoch": 39,
+    "epochs": 49,
+    "validation_loss": 0.0015734492066412109
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 123,
+    "best_epoch": 66,
+    "epochs": 76,
+    "validation_loss": 0.001744413015145507
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "best_epoch": 43,
+    "epochs": 53,
+    "validation_loss": 0.12198346710504232
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 123,
+    "best_epoch": 39,
+    "epochs": 49,
+    "validation_loss": 0.12490841721614265
+  },
+  {
+    "model": "residual_identity",
+    "seed": 123,
+    "best_epoch": 32,
+    "epochs": 42,
+    "validation_loss": 0.11041544646609583
+  },
+  {
+    "model": "xgboost",
+    "seed": 123,
+    "epochs": 500,
+    "best_epoch": 472,
+    "validation_loss": 256.0956984015245,
+    "n_features": 86
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 123,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  },
+  {
+    "model": "naive_week",
+    "seed": 123,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  },
+  {
+    "model": "grid_aware_lstm",
+    "seed": 456,
+    "best_epoch": 62,
+    "epochs": 72,
+    "validation_loss": 0.0015783324038077552
+  },
+  {
+    "model": "grid_aware_gru",
+    "seed": 456,
+    "best_epoch": 40,
+    "epochs": 50,
+    "validation_loss": 0.0019367201752003183
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "best_epoch": 40,
+    "epochs": 50,
+    "validation_loss": 0.1226229039594561
+  },
+  {
+    "model": "seasonal_grid_aware",
+    "seed": 456,
+    "best_epoch": 46,
+    "epochs": 56,
+    "validation_loss": 0.1246103316965813
+  },
+  {
+    "model": "residual_identity",
+    "seed": 456,
+    "best_epoch": 47,
+    "epochs": 57,
+    "validation_loss": 0.11029573740353915
+  },
+  {
+    "model": "xgboost",
+    "seed": 456,
+    "epochs": 500,
+    "best_epoch": 479,
+    "validation_loss": 257.55244417845336,
+    "n_features": 86
+  },
+  {
+    "model": "naive_day_available",
+    "seed": 456,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  },
+  {
+    "model": "naive_week",
+    "seed": 456,
+    "epochs": 0,
+    "best_epoch": 0,
+    "validation_loss": null
+  }
+]

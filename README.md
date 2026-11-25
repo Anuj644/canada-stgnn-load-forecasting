@@ -123,13 +123,24 @@ python -m jupyterlab train.ipynb
 
 Select the project’s Python kernel and run all cells. The notebook prepares missing processed data and baseline forecasts, then fits the residual STGCN, local XGBoost, and PBC models. To regenerate artifacts from the existing residual checkpoints, set `RETRAIN_NEW_MODELS = False`. To explicitly rebuild processed data or refit the original baselines, enable `REBUILD_DATA` or `RETRAIN_BASELINES`.
 
-The notebook writes checkpoints to `models/stgnn/`, `models/xgboost/`, and `models/pbc/`. It publishes forecasts, the matched `model_comparison.csv`, per-model metrics, and high-demand flags in `results/` for the dashboard and API. Rerunning refreshes these result files.
+The earlier notebook writes checkpoints to `models/stgnn/`, `models/xgboost/`, and `models/pbc/`, plus root-level result files used by the legacy API. The current dashboard uses the corrected cross-dataset runs described below, with its own frozen checkpoints and matched results.
 
 ### 4. Launch the dashboard
 
 ```bash
-python -m streamlit run dashboard/app.py
+python -m streamlit run dashboard/app.py --server.address 127.0.0.1
 ```
+
+The dashboard now has four pages:
+
+- **HFED forecasts:** choose the local forecast date and province; run the verified Canadian checkpoints against archive data, fresh HFED API readings, or uploaded native HFED CSVs. Compare models or the demand/weather/calendar/graph ablations, with actuals, errors, input weather and peak flags.
+- **Model results:** corrected Canadian scores, seed variation, paired intervals, regional/peak/extreme-temperature diagnostics and coverage. A separate evidence tab compares the Brazilian 1h/6h/24h metrics with the matched references and the original paper's reported Table 3; it does not serve Brazilian predictions.
+- **Ablation study:** matched fixed-architecture feature comparisons and their paired uncertainty.
+- **Proposal and methods:** the method, data sources, evaluated requirements and remaining limitations.
+
+The selected date is the **day being forecast**, issued at 23:00 local on the previous day. Only dates whose issue time has arrived can be requested. Inputs stop at the latest completed hourly interval; missing target actuals remain pending. GPU inference follows the benchmark batch shape; CPU fallback may differ slightly numerically. Reported aggregate scores average independent seeds, while the optional mean forecast is an interactive ensemble.
+
+Required assets are the HFED V4/ablation V4 runs and cache, Brazilian V3 metrics, and supplementary `results/hfed_temporal_controls_v1/` controls. The benchmark workflow in `docs/cross_dataset_validation.md` creates the primary assets. Supplementary controls and realized target-day diagnostics are documented there as descriptive additions after primary test inspection.
 
 ### 5. Launch the API backend
 
@@ -214,6 +225,38 @@ The notebook adapts Mouatadid et al. (2026) to electricity demand. Debias++ esti
 
 ## Reproducibility
 
+### Cross-dataset validation and HFED extension
+
+The new [cross-dataset workflow](docs/cross_dataset_validation.md) compares the
+Grid-Aware LSTM/GRU references, seasonal residual extensions, and the existing
+residual model on the public Brazilian dataset with repeated seeds and fixed
+validation/test periods. It then retrains the same methods on HFED; trained
+weights are not transferred between countries.
+
+This workflow adds official ECCC hourly weather observations and a separately
+cached 2025 HFED holdout. It preserves the existing dashboard checkpoints and
+historical results. Experiment plans, source snapshots, checkpoints, and keyed
+predictions are stored in separate result directories. See the workflow for
+data coverage, timestamp rules, limitations, and reproducible commands.
+
+The corrected Brazilian comparison selects the seasonal residual CNN: +24h MAE
+is 50.30 versus the reimplemented GRU's 66.30 MW in 2019 (24.1% lower), and
+56.76 versus 79.80 MW in 2020 (28.9% lower). Both comparisons use three seeds
+and matched forecast keys, with paired intervals below zero. The graph-preserving
+seasonal extension also improves MAE to 57.65 and 65.82 MW, respectively.
+
+The workflow documents updated data, source-code ambiguities, and a corrected
+GPU scheduler-storage bug. Earlier captured comparisons are superseded.
+Training batches shuffle within training periods; split assignment and
+evaluation remain chronological. These are controlled reimplementation results.
+
+Retrained separately on HFED, the CNN achieves 244.28 MW MAE on the unused 2025
+holdout: 23.4% below the best adapted Grid-Aware reference and 18.1% below
+XGBoost. All three seeds improve, with paired intervals below zero. This covers
+56,809 observed hours across eight provinces with uneven data availability.
+The workflow includes regional/peak errors and fixed weather/calendar/graph
+ablations; 51 focused test cases pass.
+
 - Baseline seeds are in `config/config.yaml`. The notebook runs the residual graph experiments with seeds 42 and 123.
 - Scalers, graph statistics, and peak thresholds are fitted on training data only
 - Splits are strictly chronological (no shuffling)
@@ -227,4 +270,8 @@ The notebook adapts Mouatadid et al. (2026) to electricity demand. Debias++ esti
 - **No hardcoded results.** All metrics displayed in the dashboard are computed from actual trained models.
 - **No invented data.** Region coordinates, interconnections, and holiday information come from documented sources only.
 - **Decision support only.** High-demand flags are for planner awareness, not grid control or dispatch.
-- The `data/` directory is git-ignored. Run the downloader to populate it.
+- Bulk downloads in `data/` are git-ignored. Selected frozen public HFED inputs,
+  ECCC observations, holiday data, and the prepared HFED benchmark cache are
+  tracked with the verified checkpoints so the dashboard can use the recorded
+  data immediately after installing dependencies. Brazilian raw data and other
+  study inputs can be regenerated with the documented download commands.

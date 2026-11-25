@@ -1,0 +1,1141 @@
+{
+  "source": "https://api.weather.gc.ca/collections/climate-hourly",
+  "selections": [
+    {
+      "region": "AB",
+      "station": {
+        "STN_ID": 27214,
+        "STATION_NAME": "EDMONTON BLATCHFORD",
+        "PROV_STATE_TERR_CODE": "AB",
+        "ENG_PROV_NAME": "ALBERTA",
+        "FRE_PROV_NAME": "ALBERTA",
+        "COUNTRY": "CAN",
+        "LATITUDE": 533423008,
+        "LONGITUDE": -1133100010,
+        "TIMEZONE": "CST",
+        "ELEVATION": "671.00",
+        "CLIMATE_IDENTIFIER": "3012209",
+        "TC_IDENTIFIER": "XEC",
+        "WMO_IDENTIFIER": "71157",
+        "STATION_TYPE": "Climate-Auto",
+        "NORMAL_CODE": "G",
+        "PUBLICATION_CODE": 1,
+        "DISPLAY_CODE": 8,
+        "ENG_STN_OPERATOR_ACRONYM": "MSC",
+        "FRE_STN_OPERATOR_ACRONYM": "SMC",
+        "ENG_STN_OPERATOR_NAME": "Environment and Climate Change Canada - Meteorological Service of Canada",
+        "FRE_STN_OPERATOR_NAME": "Environnement et Changement climatique Canada - Service m\u00e9t\u00e9orologique du Canada",
+        "FIRST_DATE": "1996-03-01 00:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "1999-06-23 08:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "1996-03-01 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": "1996-03-01 00:00:00",
+        "MLY_LAST_DATE": "2007-11-01 00:00:00",
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 3.1106460045493116,
+      "selection_2019_coverage": {
+        "TEMP": 0.998972602739726,
+        "RELATIVE_HUMIDITY": 0.998972602739726,
+        "WIND_SPEED": 0.998972602739726
+      }
+    },
+    {
+      "region": "BC",
+      "station": {
+        "STN_ID": 6833,
+        "STATION_NAME": "WEST VANCOUVER AUT",
+        "PROV_STATE_TERR_CODE": "BC",
+        "ENG_PROV_NAME": "BRITISH COLUMBIA",
+        "FRE_PROV_NAME": "COLOMBIE-BRITANNIQUE",
+        "COUNTRY": "CAN",
+        "LATITUDE": 492049350,
+        "LONGITUDE": -1231135910,
+        "TIMEZONE": "MST",
+        "ELEVATION": "170.20",
+        "CLIMATE_IDENTIFIER": "1108824",
+        "TC_IDENTIFIER": "WWA",
+        "WMO_IDENTIFIER": "71784",
+        "STATION_TYPE": "Climate-Auto",
+        "NORMAL_CODE": "F",
+        "PUBLICATION_CODE": 1,
+        "DISPLAY_CODE": 7,
+        "ENG_STN_OPERATOR_ACRONYM": "MSC",
+        "FRE_STN_OPERATOR_ACRONYM": "SMC",
+        "ENG_STN_OPERATOR_NAME": "Environment and Climate Change Canada - Meteorological Service of Canada",
+        "FRE_STN_OPERATOR_NAME": "Environnement et Changement climatique Canada - Service m\u00e9t\u00e9orologique du Canada",
+        "FIRST_DATE": "1992-01-01 00:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "1994-02-01 00:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "1992-12-01 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": "1992-01-01 00:00:00",
+        "MLY_LAST_DATE": "2007-02-01 00:00:00",
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 9.154912517008672,
+      "selection_2019_coverage": {
+        "TEMP": 0.9992009132420091,
+        "RELATIVE_HUMIDITY": 0.9992009132420091,
+        "WIND_SPEED": 0.9992009132420091
+      }
+    },
+    {
+      "region": "NB",
+      "station": {
+        "STN_ID": 30309,
+        "STATION_NAME": "FREDERICTON CDA CS",
+        "PROV_STATE_TERR_CODE": "NB",
+        "ENG_PROV_NAME": "NEW BRUNSWICK",
+        "FRE_PROV_NAME": "NOUVEAU-BRUNSWICK",
+        "COUNTRY": "CAN",
+        "LATITUDE": 455513000,
+        "LONGITUDE": -663632010,
+        "TIMEZONE": "AST",
+        "ELEVATION": "35.10",
+        "CLIMATE_IDENTIFIER": "8101605",
+        "TC_IDENTIFIER": "AFC",
+        "WMO_IDENTIFIER": "71668",
+        "STATION_TYPE": "Climate-Auto",
+        "NORMAL_CODE": "G",
+        "PUBLICATION_CODE": 1,
+        "DISPLAY_CODE": 9,
+        "ENG_STN_OPERATOR_ACRONYM": "MSC",
+        "FRE_STN_OPERATOR_ACRONYM": "SMC",
+        "ENG_STN_OPERATOR_NAME": "Environment and Climate Change Canada - Meteorological Service of Canada",
+        "FRE_STN_OPERATOR_NAME": "Environnement et Changement climatique Canada - Service m\u00e9t\u00e9orologique du Canada",
+        "FIRST_DATE": "2000-06-01 00:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2004-12-30 20:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2000-06-01 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": "2000-06-01 00:00:00",
+        "MLY_LAST_DATE": "2007-07-01 00:00:00",
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 65.4723570360593,
+      "selection_2019_coverage": {
+        "TEMP": 0.9981735159817352,
+        "RELATIVE_HUMIDITY": 0.9981735159817352,
+        "WIND_SPEED": 0.9981735159817352
+      }
+    },
+    {
+      "region": "NL",
+      "station": {
+        "STN_ID": 50089,
+        "STATION_NAME": "ST. JOHN'S INTL A",
+        "PROV_STATE_TERR_CODE": "NL",
+        "ENG_PROV_NAME": "NEWFOUNDLAND AND LABRADOR",
+        "FRE_PROV_NAME": "TERRE-NEUVE ET LABRADOR",
+        "COUNTRY": "CAN",
+        "LATITUDE": 473707000,
+        "LONGITUDE": -524509000,
+        "TIMEZONE": "NST",
+        "ELEVATION": "140.50",
+        "CLIMATE_IDENTIFIER": "8403505",
+        "TC_IDENTIFIER": "YYT",
+        "WMO_IDENTIFIER": "71801",
+        "STATION_TYPE": "Aviation-Staffed",
+        "NORMAL_CODE": null,
+        "PUBLICATION_CODE": null,
+        "DISPLAY_CODE": null,
+        "ENG_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "FRE_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "ENG_STN_OPERATOR_NAME": "NAV Canada",
+        "FRE_STN_OPERATOR_NAME": "NAV Canada",
+        "FIRST_DATE": "2012-03-20 00:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2012-03-20 15:30:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2012-03-20 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": null,
+        "MLY_LAST_DATE": null,
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 7.2548790590351455,
+      "selection_2019_coverage": {
+        "TEMP": 0.9997716894977169,
+        "RELATIVE_HUMIDITY": 0.9992009132420091,
+        "WIND_SPEED": 0.9997716894977169
+      }
+    },
+    {
+      "region": "NS",
+      "station": {
+        "STN_ID": 43405,
+        "STATION_NAME": "HALIFAX DOCKYARD",
+        "PROV_STATE_TERR_CODE": "NS",
+        "ENG_PROV_NAME": "NOVA SCOTIA",
+        "FRE_PROV_NAME": "NOUVELLE-\u00c9COSSE",
+        "COUNTRY": "CAN",
+        "LATITUDE": 443919000,
+        "LONGITUDE": -633436000,
+        "TIMEZONE": "AST",
+        "ELEVATION": "3.80",
+        "CLIMATE_IDENTIFIER": "8202240",
+        "TC_IDENTIFIER": "AHD",
+        "WMO_IDENTIFIER": "71328",
+        "STATION_TYPE": "Climate-Auto",
+        "NORMAL_CODE": null,
+        "PUBLICATION_CODE": null,
+        "DISPLAY_CODE": null,
+        "ENG_STN_OPERATOR_ACRONYM": "DND",
+        "FRE_STN_OPERATOR_ACRONYM": "MDN",
+        "ENG_STN_OPERATOR_NAME": "Department of National Defence",
+        "FRE_STN_OPERATOR_NAME": "Minist\u00e8re de la D\u00e9fense nationale",
+        "FIRST_DATE": "2004-09-24 18:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2004-09-24 18:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2018-05-14 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": null,
+        "MLY_LAST_DATE": null,
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 0.7889873806095997,
+      "selection_2019_coverage": {
+        "TEMP": 0.9997716894977169,
+        "RELATIVE_HUMIDITY": 0.9996575342465753,
+        "WIND_SPEED": 0.9997716894977169
+      }
+    },
+    {
+      "region": "ON",
+      "station": {
+        "STN_ID": 48549,
+        "STATION_NAME": "TORONTO CITY CENTRE",
+        "PROV_STATE_TERR_CODE": "ON",
+        "ENG_PROV_NAME": "ONTARIO",
+        "FRE_PROV_NAME": "ONTARIO",
+        "COUNTRY": "CAN",
+        "LATITUDE": 433739000,
+        "LONGITUDE": -792346000,
+        "TIMEZONE": "EST",
+        "ELEVATION": "76.80",
+        "CLIMATE_IDENTIFIER": "6158359",
+        "TC_IDENTIFIER": "YTZ",
+        "WMO_IDENTIFIER": "71265",
+        "STATION_TYPE": "Aviation-Auto",
+        "NORMAL_CODE": null,
+        "PUBLICATION_CODE": null,
+        "DISPLAY_CODE": null,
+        "ENG_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "FRE_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "ENG_STN_OPERATOR_NAME": "NAV Canada",
+        "FRE_STN_OPERATOR_NAME": "NAV Canada",
+        "FIRST_DATE": "2009-12-10 17:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2009-12-10 17:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2010-02-02 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": null,
+        "MLY_LAST_DATE": null,
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 2.817861353398253,
+      "selection_2019_coverage": {
+        "TEMP": 0.9891552511415526,
+        "RELATIVE_HUMIDITY": 0.9834474885844748,
+        "WIND_SPEED": 0.9973744292237443
+      }
+    },
+    {
+      "region": "PE",
+      "station": {
+        "STN_ID": 50621,
+        "STATION_NAME": "CHARLOTTETOWN A",
+        "PROV_STATE_TERR_CODE": "PE",
+        "ENG_PROV_NAME": "PRINCE EDWARD ISLAND",
+        "FRE_PROV_NAME": "\u00ceLE DU PRINCE-\u00c9DOUARD",
+        "COUNTRY": "CAN",
+        "LATITUDE": 461721000,
+        "LONGITUDE": -630709000,
+        "TIMEZONE": "AST",
+        "ELEVATION": "50.90",
+        "CLIMATE_IDENTIFIER": "8300301",
+        "TC_IDENTIFIER": "YYG",
+        "WMO_IDENTIFIER": "71706",
+        "STATION_TYPE": "Aviation-Staffed",
+        "NORMAL_CODE": null,
+        "PUBLICATION_CODE": null,
+        "DISPLAY_CODE": null,
+        "ENG_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "FRE_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "ENG_STN_OPERATOR_NAME": "NAV Canada",
+        "FRE_STN_OPERATOR_NAME": "NAV Canada",
+        "FIRST_DATE": "2012-09-10 14:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2012-09-10 14:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2012-09-13 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": null,
+        "MLY_LAST_DATE": null,
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 5.530147737059274,
+      "selection_2019_coverage": {
+        "TEMP": 0.9982876712328768,
+        "RELATIVE_HUMIDITY": 0.9982876712328768,
+        "WIND_SPEED": 0.9980593607305936
+      }
+    },
+    {
+      "region": "QC",
+      "station": {
+        "STN_ID": 48374,
+        "STATION_NAME": "MONTREAL/ST-HUBERT",
+        "PROV_STATE_TERR_CODE": "QC",
+        "ENG_PROV_NAME": "QUEBEC",
+        "FRE_PROV_NAME": "QU\u00c9BEC",
+        "COUNTRY": "CAN",
+        "LATITUDE": 453103000,
+        "LONGITUDE": -732501000,
+        "TIMEZONE": "EST",
+        "ELEVATION": "27.40",
+        "CLIMATE_IDENTIFIER": "7027329",
+        "TC_IDENTIFIER": "YHU",
+        "WMO_IDENTIFIER": "71371",
+        "STATION_TYPE": "Aviation-Auto",
+        "NORMAL_CODE": null,
+        "PUBLICATION_CODE": null,
+        "DISPLAY_CODE": null,
+        "ENG_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "FRE_STN_OPERATOR_ACRONYM": "NAVCAN",
+        "ENG_STN_OPERATOR_NAME": "NAV Canada",
+        "FRE_STN_OPERATOR_NAME": "NAV Canada",
+        "FIRST_DATE": "2009-12-10 17:00:00",
+        "LAST_DATE": "2026-11-22 12:30:09",
+        "HLY_FIRST_DATE": "2009-12-10 17:00:00",
+        "HLY_LAST_DATE": "2026-11-22 12:30:09",
+        "DLY_FIRST_DATE": "2009-12-17 00:00:00",
+        "DLY_LAST_DATE": "2026-11-22 00:00:00",
+        "MLY_FIRST_DATE": null,
+        "MLY_LAST_DATE": null,
+        "HAS_MONTHLY_SUMMARY": "Y",
+        "HAS_NORMALS_DATA": "N",
+        "HAS_HOURLY_DATA": "Y"
+      },
+      "distance_km": 12.08461769228223,
+      "selection_2019_coverage": {
+        "TEMP": 0.9988584474885844,
+        "RELATIVE_HUMIDITY": 0.9992009132420091,
+        "WIND_SPEED": 0.9992009132420091
+      }
+    }
+  ],
+  "files": [
+    {
+      "region": "AB",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2019.csv",
+      "sha256": "7f2f2f61ed2efaf419467c3879ceec3b287a25d8dfed520122577ecb5124a720",
+      "n_rows": 8751
+    },
+    {
+      "region": "AB",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2020.csv",
+      "sha256": "e2c25aae24051ee93cce0b2e52262501177ab288b692125519a977b6d9cafe05",
+      "n_rows": 8777
+    },
+    {
+      "region": "AB",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2021.csv",
+      "sha256": "6b2ff10c1c7a4db66aefd9770e9692f8114e4840d8e4f4f69660c7e55b10a239",
+      "n_rows": 7896
+    },
+    {
+      "region": "AB",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2022.csv",
+      "sha256": "762e0657a9b06859270815a75c40ca0c55435a1a6e22df9d02a822e6dd3ab6bd",
+      "n_rows": 8712
+    },
+    {
+      "region": "AB",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2023.csv",
+      "sha256": "847fde90d2915536dec437973937b378a73480b928f81a4269ac0fe299036673",
+      "n_rows": 8750
+    },
+    {
+      "region": "AB",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2024.csv",
+      "sha256": "f132b33bf0bf8a696772bbdc010e9aa4e7ba9e8b0af87286ff3147949d74e406",
+      "n_rows": 8780
+    },
+    {
+      "region": "AB",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "3012209",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "3012209_2025.csv",
+      "sha256": "3da4a0057627e713a3545d7976e68a980c9edf0f1d2a855f6faedc6157c1a640",
+      "n_rows": 8750
+    },
+    {
+      "region": "BC",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2019.csv",
+      "sha256": "e89872695051be2ded66c1b40dfd2ece9d78babadf7546ac7f11e1db1b241878",
+      "n_rows": 8753
+    },
+    {
+      "region": "BC",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2020.csv",
+      "sha256": "66bfd684bb0d129bc21adc377e43dd86774e5ef33e97ed9b57e91986c683eb20",
+      "n_rows": 8566
+    },
+    {
+      "region": "BC",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2021.csv",
+      "sha256": "7145ca5f6969e6add27867f32b5145fa7f1aa8a432aca83dac3c5508eff3078c",
+      "n_rows": 8733
+    },
+    {
+      "region": "BC",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2022.csv",
+      "sha256": "561be8baef99a66d73ac0f73d6843ff1287da46ac72a17202c3988f63893666f",
+      "n_rows": 8741
+    },
+    {
+      "region": "BC",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2023.csv",
+      "sha256": "311f06ed6ea9b39665ded710090820f4fb27b60136b378bd8cbcda8c61ecfe78",
+      "n_rows": 8734
+    },
+    {
+      "region": "BC",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2024.csv",
+      "sha256": "53b1ec3f021bcea63d5618f09c782f1f580ff6f2617437631b384513dcb816bb",
+      "n_rows": 8772
+    },
+    {
+      "region": "BC",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "1108824",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "1108824_2025.csv",
+      "sha256": "c68aba39f27f5a7334d8e06c6632179e98f1e662484ae2b7e15dcaaf9b49dddb",
+      "n_rows": 8726
+    },
+    {
+      "region": "NB",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2019.csv",
+      "sha256": "8d62eef0677f4f04320967832d8ebf6ea03ba207f2596dd9aba28671fee644e0",
+      "n_rows": 8744
+    },
+    {
+      "region": "NB",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2020.csv",
+      "sha256": "f6958e41743dc92f9d6869d72233f44bfcce76cb09ad40ebdb05119f7c0e478d",
+      "n_rows": 8766
+    },
+    {
+      "region": "NB",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2021.csv",
+      "sha256": "52344933b863a6c2f51ebaa075bad08abf710732ecd3899c90b646468b8b86a9",
+      "n_rows": 8739
+    },
+    {
+      "region": "NB",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2022.csv",
+      "sha256": "3942f47f637be8df862246718da1f4f2db98e5d948e4129a76278d84c43f62ae",
+      "n_rows": 8744
+    },
+    {
+      "region": "NB",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2023.csv",
+      "sha256": "8981b4dd32f8894b7c8836cca5e9500e3fc2e34900efa6987056e98a1e9e37c3",
+      "n_rows": 8750
+    },
+    {
+      "region": "NB",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2024.csv",
+      "sha256": "fcfe179e5ffda17dfba0d8542f476397ee717c333665dac80353d52b48158ab3",
+      "n_rows": 8762
+    },
+    {
+      "region": "NB",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8101605",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8101605_2025.csv",
+      "sha256": "288a9ff1621ab62206fe7d9ddf327617b3655b7c4c622d9777b91efdce74621c",
+      "n_rows": 8747
+    },
+    {
+      "region": "NL",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2019.csv",
+      "sha256": "adc95d0e29c7301d5c31e2a03ebf9883faff6ff4cb556ab047493a3806c7e874",
+      "n_rows": 8758
+    },
+    {
+      "region": "NL",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2020.csv",
+      "sha256": "a5bf1959bf4b929ef7a20dd3551f0f88b856667876a16ab7a1b5bc354faddc87",
+      "n_rows": 8772
+    },
+    {
+      "region": "NL",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2021.csv",
+      "sha256": "9909109d108b1abf8c08eac5589ac0f2d31182e974ef98c5618092df79721755",
+      "n_rows": 8754
+    },
+    {
+      "region": "NL",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2022.csv",
+      "sha256": "0f7cac182ce210ac4cb161319a853a7dee9fd17cf6df3ff249ae3b707eba8115",
+      "n_rows": 8751
+    },
+    {
+      "region": "NL",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2023.csv",
+      "sha256": "c15736987c0d11ead470832ff3709eaa40d77ee7d20d6139cd14ff4a47082dcb",
+      "n_rows": 8759
+    },
+    {
+      "region": "NL",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2024.csv",
+      "sha256": "30428e4862ddb97b7d40fd56386262dc3330733c0cef5b1685276e7b7ddc55b3",
+      "n_rows": 8781
+    },
+    {
+      "region": "NL",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8403505",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8403505_2025.csv",
+      "sha256": "7bf23e9559087d6429f2c899fbee0850854c7dbb3e36c0e179c898729b1d55de",
+      "n_rows": 8755
+    },
+    {
+      "region": "NS",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2019.csv",
+      "sha256": "5a3ea5ba31280a0883cafb8ee88f93f345f02e692d46dfd678b504314788b9fe",
+      "n_rows": 8758
+    },
+    {
+      "region": "NS",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2020.csv",
+      "sha256": "2f55959e1553d2b77e046d497b66b280f6d228d196696b3eb3b0641cf70611fe",
+      "n_rows": 8774
+    },
+    {
+      "region": "NS",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2021.csv",
+      "sha256": "2bfc68fb4e6149c1e946e69b53d6eb1c050f8ed36f49465fc76f611a8ed89c8b",
+      "n_rows": 8755
+    },
+    {
+      "region": "NS",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2022.csv",
+      "sha256": "b3a78241b591ab4e4bc2826999dd33d7cf33364f2f8a46150e9baceee40b5be1",
+      "n_rows": 8454
+    },
+    {
+      "region": "NS",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2023.csv",
+      "sha256": "149c4b68328cc27810926d24c4c463249a7520ce31203c66baeaeedc9f589feb",
+      "n_rows": 8388
+    },
+    {
+      "region": "NS",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2024.csv",
+      "sha256": "f15838f4bd7a02b29d782f12e7767ec40e3889cbd26708d5f9fbde48ad46236f",
+      "n_rows": 8452
+    },
+    {
+      "region": "NS",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8202240",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8202240_2025.csv",
+      "sha256": "200a0cda59db99959e07d338b690d432e3a8cdab502a06ae09da31d6b39941d4",
+      "n_rows": 8753
+    },
+    {
+      "region": "ON",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2019.csv",
+      "sha256": "b0af4e19067a2d7f61712e7b4ec357d512757134f05394d20a27090944d78742",
+      "n_rows": 8744
+    },
+    {
+      "region": "ON",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2020.csv",
+      "sha256": "3bcf9c452eecb7b7967b39fa6140cf7635ad5eb0f9c557e7222971b6f6d8f0d4",
+      "n_rows": 8778
+    },
+    {
+      "region": "ON",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2021.csv",
+      "sha256": "aadcb137d86da9b713d2a05280b0474273fa854a64dd5ffbd7de9c35c8d447f6",
+      "n_rows": 8746
+    },
+    {
+      "region": "ON",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2022.csv",
+      "sha256": "d9fb58db34aa307db1d1d95dcba482cd87dff0060c75e5a17d423d036bb29f96",
+      "n_rows": 8739
+    },
+    {
+      "region": "ON",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2023.csv",
+      "sha256": "c7413f6fdbd7f1bd56c10a40a5d86f0a6d3f9f6f38cf563c751f791997469116",
+      "n_rows": 8754
+    },
+    {
+      "region": "ON",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2024.csv",
+      "sha256": "722ba41bef7a484d0baf33b9257357c4dd0ec359b3c6246d096ddb7261205633",
+      "n_rows": 8756
+    },
+    {
+      "region": "ON",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "6158359",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "6158359_2025.csv",
+      "sha256": "f0c33bac1ebf6ed7b1db3466f0a48ffbd4f516b3fe509ca457adda2749d6a93b",
+      "n_rows": 8741
+    },
+    {
+      "region": "PE",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2019.csv",
+      "sha256": "0ff22f1cb880c46aa87deeb3bd6148bc904397b3a6f67951a94ede7e1f9b380a",
+      "n_rows": 8745
+    },
+    {
+      "region": "PE",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2020.csv",
+      "sha256": "28ae4032c9339e022228216a1d6b36587f3e5813f06e9676dd6e4fcab92f5cac",
+      "n_rows": 8780
+    },
+    {
+      "region": "PE",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2021.csv",
+      "sha256": "4779d931b5a912a4571fb279fb1c38f76a52a638cc4d04881b273499bbfd57d3",
+      "n_rows": 8760
+    },
+    {
+      "region": "PE",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2022.csv",
+      "sha256": "5fdb03385d0f0063adfd37cdb345b9dbcda37298ea5ce1cfb9c58d30f940fe91",
+      "n_rows": 8745
+    },
+    {
+      "region": "PE",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2023.csv",
+      "sha256": "a3fe81a531db3892fd011caa787348ab49211b9d8480cc9567e39c105c110a1e",
+      "n_rows": 8751
+    },
+    {
+      "region": "PE",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2024.csv",
+      "sha256": "ae6cf57a258c81c9c24b79dd4a5dc2996b24755b6cf8d256b1cdbc7da110ca3f",
+      "n_rows": 8762
+    },
+    {
+      "region": "PE",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "8300301",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "8300301_2025.csv",
+      "sha256": "4662f370aef3810c4a378ed2801acdc6ddfd9b9f4c66de1595b7af2ceca23dbd",
+      "n_rows": 8733
+    },
+    {
+      "region": "QC",
+      "year": 2019,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2019,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2019.csv",
+      "sha256": "228c1b403565cc31d5a853d6ab0c2c9dd1ab675194619a9fcd5f9b5c00ebd13c",
+      "n_rows": 8753
+    },
+    {
+      "region": "QC",
+      "year": 2020,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2020,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2020.csv",
+      "sha256": "614ce13b3c04f3b7ebd6644ec7c20967ea15d66295eae87349d581f9a6d5173c",
+      "n_rows": 8778
+    },
+    {
+      "region": "QC",
+      "year": 2021,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2021,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2021.csv",
+      "sha256": "12ce07fb76fa6263dc2487c4e05bfebbe35f6c027b43399d7d4781c20fc0c09b",
+      "n_rows": 8751
+    },
+    {
+      "region": "QC",
+      "year": 2022,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2022,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2022.csv",
+      "sha256": "476ddc61b3b9759c94463e0c31849a8c2b48b53651454379615b8d30e27bad62",
+      "n_rows": 8744
+    },
+    {
+      "region": "QC",
+      "year": 2023,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2023,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2023.csv",
+      "sha256": "450d4ef31bc18eb212b9a5a67614c6411b1996c21b26bcd8e60c649896599862",
+      "n_rows": 8752
+    },
+    {
+      "region": "QC",
+      "year": 2024,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2024,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2024.csv",
+      "sha256": "9e5e813bf21930602ae3f738b445d04159e79ef5823542f24cccd58abaceb3e9",
+      "n_rows": 8766
+    },
+    {
+      "region": "QC",
+      "year": 2025,
+      "params": {
+        "CLIMATE_IDENTIFIER": "7027329",
+        "UTC_YEAR": 2025,
+        "limit": 10000,
+        "properties": "UTC_DATE,TEMP,RELATIVE_HUMIDITY,WIND_SPEED",
+        "f": "csv"
+      },
+      "file": "7027329_2025.csv",
+      "sha256": "7bc730cf2fcd9ea6a5f10fe925026d263c00b310a665bca4f1c8900f41263e51",
+      "n_rows": 8744
+    }
+  ],
+  "selection_policy": "Nearest same-province station spanning 2019-2025 with >=80% coverage of all three variables in 2019",
+  "limitations": [
+    "One station is a representative proxy, not province-wide weather.",
+    "Archived observations may be revised; exact historical publication latency is not reproduced.",
+    "Assume a one-hour reporting buffer and never interpolate from future observations."
+  ]
+}

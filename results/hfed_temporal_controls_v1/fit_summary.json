@@ -1,0 +1,44 @@
+[
+  {
+    "model": "temporal_lstm",
+    "seed": 42,
+    "best_epoch": 41,
+    "epochs": 51,
+    "validation_loss": 0.0015262198526495667
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 42,
+    "best_epoch": 48,
+    "epochs": 58,
+    "validation_loss": 0.0016553190723946531
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 123,
+    "best_epoch": 36,
+    "epochs": 46,
+    "validation_loss": 0.001541422094383989
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 123,
+    "best_epoch": 44,
+    "epochs": 54,
+    "validation_loss": 0.0016699650276625335
+  },
+  {
+    "model": "temporal_lstm",
+    "seed": 456,
+    "best_epoch": 37,
+    "epochs": 47,
+    "validation_loss": 0.0014904021036351483
+  },
+  {
+    "model": "temporal_gru",
+    "seed": 456,
+    "best_epoch": 38,
+    "epochs": 48,
+    "validation_loss": 0.001652250487661925
+  }
+]

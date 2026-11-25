@@ -1,0 +1,38 @@
+{
+  "definition": "Observed mean temperature over the 24 target-day hours; at least 12 observations. Cold/hot: provincial training-only 5th/95th percentiles.",
+  "scope": "Retrospective diagnostic added for the proposal/dashboard after primary results were inspected. Realized target-day weather is not a forecasting input and does not select checkpoints. No additional confirmatory significance claim.",
+  "thresholds": {
+    "AB": {
+      "cold_5pct_c": -10.436874999999999,
+      "hot_95pct_c": 22.360625
+    },
+    "BC": {
+      "cold_5pct_c": 1.3433333333333335,
+      "hot_95pct_c": 20.865
+    },
+    "NB": {
+      "cold_5pct_c": -10.423541666666667,
+      "hot_95pct_c": 21.997083333333332
+    },
+    "NL": {
+      "cold_5pct_c": -4.908333333333333,
+      "hot_95pct_c": 19.737499999999997
+    },
+    "NS": {
+      "cold_5pct_c": -1.971041666666666,
+      "hot_95pct_c": 21.180625
+    },
+    "ON": {
+      "cold_5pct_c": -5.620375,
+      "hot_95pct_c": 22.996249999999996
+    },
+    "PE": {
+      "cold_5pct_c": -8.079583333333334,
+      "hot_95pct_c": 21.702499999999997
+    },
+    "QC": {
+      "cold_5pct_c": -11.819791666666667,
+      "hot_95pct_c": 23.985416666666666
+    }
+  }
+}

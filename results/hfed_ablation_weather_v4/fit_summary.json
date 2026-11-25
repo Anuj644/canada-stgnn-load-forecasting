@@ -1,0 +1,23 @@
+[
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "best_epoch": 69,
+    "epochs": 79,
+    "validation_loss": 0.14723733370068107
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "best_epoch": 65,
+    "epochs": 75,
+    "validation_loss": 0.14800376270077242
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "best_epoch": 62,
+    "epochs": 72,
+    "validation_loss": 0.14865318929528507
+  }
+]

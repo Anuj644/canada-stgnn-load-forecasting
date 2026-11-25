@@ -1,11 +1,9 @@
-"""Streamlit dashboard for day-ahead electricity demand forecasting in Canada.
+"""Streamlit dashboard for verified HFED day-ahead demand forecasts.
 
-Pages:
-  Live forecast      Pick the last observed day; the residual STGCN retrained on HFED
-                     API data forecasts the next 24 hours from a fresh API pull.
-  Forecast from CSV  Upload two weeks of HFED demand and compare all models.
-  Model results      Held-out scores, per-province accuracy and high-demand hours.
-  Forecast explorer  Saved test-period forecasts from every model.
+Active pages serve date-based forecasts from corrected checkpoints, benchmark
+evidence, fixed-architecture ablations, and the proposal's planning diagnostics.
+The earlier prototype functions below are retained for reference; main() routes
+only to dashboard.benchmark_pages and its verified artifacts.
 
 Run:
     streamlit run dashboard/app.py
@@ -734,16 +732,17 @@ def main():
     st.set_page_config(page_title="Canada Electricity Demand Forecast", page_icon=":material/bolt:",
                        layout="wide", initial_sidebar_state="expanded")
     st.markdown(CSS, unsafe_allow_html=True)
+    from dashboard.benchmark_pages import forecast_page, results_page, ablation_page, methods_page
     with st.sidebar:
         st.markdown('<div class="sidebar-brand">Canada day-ahead<br>electricity demand</div>',
                     unsafe_allow_html=True)
-        st.markdown('<div class="sidebar-note">Spatio-temporal graph forecasts for eight provinces '
-                    'from Statistics Canada HFED data.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-note">Verified HFED forecasts, model comparisons and '
+                    'weather/calendar/graph ablations for eight provinces.</div>', unsafe_allow_html=True)
     navigation = st.navigation([
-        st.Page(page_live_forecast, title="Live forecast", icon=":material/bolt:", default=True),
-        st.Page(page_csv_forecast, title="Forecast from CSV", icon=":material/upload_file:"),
-        st.Page(page_model_results, title="Model results", icon=":material/leaderboard:"),
-        st.Page(page_forecast_explorer, title="Forecast explorer", icon=":material/query_stats:"),
+        st.Page(forecast_page, title="HFED forecasts", icon=":material/bolt:", default=True),
+        st.Page(results_page, title="Model results", icon=":material/leaderboard:"),
+        st.Page(ablation_page, title="Ablation study", icon=":material/query_stats:"),
+        st.Page(methods_page, title="Proposal and methods", icon=":material/description:"),
     ])
     navigation.run()
 

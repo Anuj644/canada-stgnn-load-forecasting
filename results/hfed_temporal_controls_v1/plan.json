@@ -1,0 +1,71 @@
+{
+  "stage": "fit",
+  "cache": "C:\\Users\\ragha\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\Projects\\canada-stgnn-load-forecasting\\data\\processed\\hfed_extension_eccc_v2",
+  "output": "results\\hfed_temporal_controls_v1",
+  "models": [
+    "temporal_lstm",
+    "temporal_gru"
+  ],
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "feature_set": "demand_weather_calendar",
+  "epochs": 200,
+  "patience": 10,
+  "batch_size": 32,
+  "device": "cuda",
+  "cuda_graphs": true,
+  "capture_steps": 16,
+  "train": "forecast dates before 2024-01-01",
+  "validation": "Jan-Jun 2024",
+  "boundary_purging": {
+    "dst_day": 112,
+    "insufficient_history": 4827,
+    "no_actual": 33,
+    "purged_train_boundary": 8,
+    "purged_validation_boundary": 8
+  },
+  "tests": {
+    "test2024": "Jul-Dec 2024 (previously inspected period)",
+    "test2025": "fresh 2025 holdout"
+  },
+  "weather": "Official ECCC hourly station observations; one-hour reporting buffer assumed, archived revisions not reproduced.",
+  "issue": "23:00 local; latest input interval ends at issue time",
+  "graph": "Geographic <=2000km, edge attribute distance; no invented grid capacities",
+  "information_difference": "Seasonal/residual methods add seven daily lags and target calendars to the 24h history used by the Grid-Aware references.",
+  "residual_cnn_inputs": "Past demand and observation mask, seasonal load lags and known target calendars; no weather inputs.",
+  "training_loss_reporting": "Mean optimization-step loss for CUDA replay; valid-observation weighted loss for eager execution. Validation always uses valid-observation weighting.",
+  "scheduler": "TensorPreservingPlateau; factor 0.1, patience 5; captured LR storage updated in place",
+  "environment": {
+    "torch": "2.6.0+cu124",
+    "python": "3.12.16 (main, Oct 26 2026, 14:10:56) [MSC v.1944 64 bit (AMD64)]",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU"
+  },
+  "cache_sha256": "45e7d7afe1a8fb16f45e2082b471027fccd58443bf767a0d93cb5c99232a1c29",
+  "brazil_validation_selection": {
+    "selected_method": "residual_identity",
+    "criterion": "Lowest mean 24h validation MAE across all predeclared seeds",
+    "validation_period": "2019-01-01 through 2019-06-30",
+    "mean_validation_mae": {
+      "grid_aware_gru": 70.85537465413411,
+      "grid_aware_lstm": 85.48939514160156,
+      "residual_identity": 55.146690368652344,
+      "seasonal_grid_aware": 64.99587376912434,
+      "seasonal_identity": 65.60129292805989
+    },
+    "test_metrics_used": false,
+    "hfed_models": [
+      "grid_aware_lstm",
+      "grid_aware_gru",
+      "seasonal_identity",
+      "seasonal_grid_aware",
+      "residual_identity",
+      "xgboost",
+      "naive_day_available",
+      "naive_week"
+    ]
+  },
+  "supplementary_scope": "Own-history temporal controls added for proposal/dashboard after primary 2025 results were inspected. Fixed published RNN dimensions/rates; validation-only checkpoint selection; no test tuning. Descriptive comparison, not another blinded confirmation."
+}

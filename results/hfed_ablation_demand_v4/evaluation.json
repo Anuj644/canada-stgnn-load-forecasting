@@ -1,0 +1,62 @@
+[
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "period": "test2024",
+    "mae": 249.11109985164794,
+    "rmse": 521.2073167642176,
+    "mape": 3.8512866070369007,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 42,
+    "period": "test2025",
+    "mae": 323.34517100786974,
+    "rmse": 691.106903602252,
+    "mape": 4.534128879785469,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "period": "test2024",
+    "mae": 251.08483650613175,
+    "rmse": 519.8298216097016,
+    "mape": 3.9311022834991953,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 123,
+    "period": "test2025",
+    "mae": 323.0205547142932,
+    "rmse": 669.5096519119309,
+    "mape": 4.622760182810788,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "period": "test2024",
+    "mae": 247.14009540904473,
+    "rmse": 516.3682536651502,
+    "mape": 3.786358382675877,
+    "mape_n_excluded": 0,
+    "n_obs": 30882
+  },
+  {
+    "model": "seasonal_identity",
+    "seed": 456,
+    "period": "test2025",
+    "mae": 320.20030131581177,
+    "rmse": 682.5220552526673,
+    "mape": 4.472525366272265,
+    "mape_n_excluded": 0,
+    "n_obs": 56809
+  }
+]
